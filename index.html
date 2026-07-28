@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANZO2TEAM – أداة فتح وتفعيل ألعاب ستيم</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <div id="radarOverlay">
+    <div class="radar-wrap">
+      <svg class="radar-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(255,179,32,0.03)"/>
+            <stop offset="100%" stop-color="rgba(255,179,32,0)"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- الخلفية -->
+        <circle cx="140" cy="140" r="130" fill="#0a0a14" stroke="rgba(255,179,32,0.06)" stroke-width="1"/>
+        <circle cx="140" cy="140" r="130" fill="url(#radarGlow)"/>
+        <!-- دوائر الرادار -->
+        <circle cx="140" cy="140" r="110" fill="none" stroke="rgba(255,179,32,0.06)" stroke-width="0.5"/>
+        <circle cx="140" cy="140" r="80" fill="none" stroke="rgba(255,179,32,0.06)" stroke-width="0.5"/>
+        <circle cx="140" cy="140" r="50" fill="none" stroke="rgba(255,179,32,0.06)" stroke-width="0.5"/>
+        <circle cx="140" cy="140" r="20" fill="none" stroke="rgba(255,179,32,0.06)" stroke-width="0.5"/>
+        <!-- خطوط الشبكة -->
+        <line x1="140" y1="10" x2="140" y2="270" stroke="rgba(255,179,32,0.04)" stroke-width="0.5"/>
+        <line x1="10" y1="140" x2="270" y2="140" stroke="rgba(255,179,32,0.04)" stroke-width="0.5"/>
+        <line x1="48" y1="48" x2="232" y2="232" stroke="rgba(255,179,32,0.03)" stroke-width="0.5"/>
+        <line x1="48" y1="232" x2="232" y2="48" stroke="rgba(255,179,32,0.03)" stroke-width="0.5"/>
+        <!-- Sweep line (الدوران) -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 140 140" to="360 140 140" dur="3s" repeatCount="indefinite"/>
+          <polygon points="140,140 140,12 180,12" fill="rgba(255,179,32,0.06)" stroke="none"/>
+          <line x1="140" y1="140" x2="140" y2="12" stroke="#ffb320" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        </g>
+        <!-- النقطة المركزية -->
+        <circle cx="140" cy="140" r="4" fill="#ffb320" filter="url(#glow)"/>
+        <!-- Blip: GAMES (الهدف الأول - أخضر/ذهبي) -->
+        <g>
+          <circle cx="220" cy="70" r="5" fill="#4caf50" opacity="0.9">
+            <animate attributeName="opacity" dur="1.5s" repeatCount="indefinite" values="0.9;0.3;0.9"/>
+          </circle>
+          <!-- موجة من المركز ← لعبة -->
+          <line x1="144" y1="140" x2="216" y2="73" stroke="#ffb320" stroke-width="1.2" opacity="0.6">
+            <animate attributeName="opacity" dur="1.2s" repeatCount="indefinite" values="0.6;0.1;0.6"/>
+          </line>
+        </g>
+        <!-- Blip: VIRUS (الهدف الثاني - أحمر) -->
+        <g>
+          <circle cx="80" cy="90" r="5" fill="#ff5555" opacity="0.9">
+            <animate attributeName="opacity" dur="1.8s" repeatCount="indefinite" values="0.9;0.2;0.9"/>
+          </circle>
+          <!-- موجة غاضبة من المركز ← فيروس -->
+          <line x1="140" y1="136" x2="83" y2="93" stroke="#ff5555" stroke-width="1.5" opacity="0.6">
+            <animate attributeName="opacity" dur="0.6s" repeatCount="indefinite" values="0.6;0.1;0.6"/>
+          </line>
+        </g>
+        <!-- Blip: WARNING (الهدف الثالث - ذهبي) -->
+        <g>
+          <circle cx="160" cy="210" r="5" fill="#ffb320" opacity="0.9">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0.9;0.3;0.9"/>
+          </circle>
+          <line x1="140" y1="144" x2="157" y2="207" stroke="#ffb320" stroke-width="1.2" opacity="0.6" stroke-dasharray="4,3">
+            <animate attributeName="opacity" dur="1.5s" repeatCount="indefinite" values="0.6;0.1;0.6"/>
+          </line>
+        </g>
+        <!-- نقطة صغيرة متحركة (ضوضاء رادار) -->
+        <circle cx="50" cy="200" r="2" fill="rgba(255,179,32,0.3)">
+          <animate attributeName="cx" dur="4s" repeatCount="indefinite" values="50;250;50"/>
+          <animate attributeName="cy" dur="3s" repeatCount="indefinite" values="200;60;200"/>
+          <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0.3;0;0.3"/>
+        </circle>
+        <circle cx="200" cy="190" r="1.5" fill="rgba(255,179,32,0.2)">
+          <animate attributeName="cx" dur="5s" repeatCount="indefinite" values="200;30;200"/>
+          <animate attributeName="cy" dur="4s" repeatCount="indefinite" values="190;80;190"/>
+          <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0.2;0;0.2"/>
+        </circle>
+      </svg>
+    </div>
+  </div>
+
+  <audio id="loadAudio" src="HanzoBoost.mp3" preload="auto"></audio>
+
+  <script>
+    (function(){
+      var audio = document.getElementById('loadAudio');
+      var p = audio.play();
+      if (p !== undefined) p.catch(function(){});
+      setTimeout(function(){
+        var o = document.getElementById('radarOverlay');
+        if (o) o.classList.add('fade-out');
+      }, 4000);
+      setTimeout(function(){
+        var o = document.getElementById('radarOverlay');
+        if (o) o.style.display = 'none';
+      }, 4800);
+    })();
+  </script>
+
+  <!-- ========== مشغل الصوت الخلفي ========== -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="HanzoBoost.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="musicToggle" title="كتم/تشغيل الصوت">
+    <i class="fas fa-music"></i>
+  </button>
+
+  <!-- ========== شريط التنقل ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">HANZO<span class="gold">2</span>TEAM</a>
+      <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link">الرئيسية</a></li>
+        <li><a href="#about" class="nav-link">عن الأداة</a></li>
+        <li><a href="#features" class="nav-link">المميزات</a></li>
+        <li><a href="#guide" class="nav-link">كيفية الاستخدام</a></li>
+        <li><a href="policy.html" class="nav-link nav-policy">سياسة الحظر</a></li>
+        <li><a href="#pricing" class="nav-link">السعر</a></li>
+        <li><a href="help.html" class="nav-link nav-help">مساعدة وحلول</a></li>
+        <li><a href="dangers.html" class="nav-link nav-danger">تحذير المخاطر</a></li>
+        <li><a href="#contact" class="nav-link">الدعم</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== القسم الرئيسي ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-bg-video">
+      <video autoplay loop muted playsinline>
+        <source src="https://i.imgur.com/cNrs3wZ.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container hero-content">
+      <img src="1.png" alt="HANZO2TEAM" class="hero-logo-img">
+      <h1 class="hero-title">HANZO<span class="gold">2</span>TEAM</h1>
+      <p class="hero-subtitle">أداة احترافية لفتح وتفعيل ألعاب ستيم</p>
+      <p class="hero-desc">حمل البرنامج، شغله، واستمتع بألعابك — كل ذلك بضغطة زر وبدون تعقيد.</p>
+      <div class="hero-buttons">
+        <a href="#pricing" class="btn btn-gold">اشترِ الآن</a>
+        <a href="#features" class="btn btn-outline">اكتشف المميزات</a>
+      </div>
+    </div>
+    <div class="hero-wave"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C320,120 720,-20 1440,50 L1440,100 L0,100 Z" fill="#0a0a0f"/></svg></div>
+  </section>
+
+  <!-- ========== قسم عن الأداة ========== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <h2 class="section-title">عن <span class="gold">HANZO2TEAM</span></h2>
+      <p class="section-subtitle">الأداة الأشمل لفتح ألعاب ستيم على ويندوز</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p><strong>HANZO2TEAM</strong> هو برنامج يساعدك على تشغيل ألعاب ستيم بسهولة. كل اللي عليك هو تحميل البرنامج، تشغيله، وتركه يعمل.</p>
+          <p>البرنامج يحفظ نسخة احتياطية من ملفات ستيم الأصلية، ويرجعها لك تلقائياً لو احتجت. كل شيء آمن ومضمون.</p>
+          <p>فيه وضع سهل للمبتدئين ووضع متقدم للمستخدمين الخبرة. كمان تقدر تضيف ألعاب، تصلح مشاكلها، وتحسن أدائها.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+            <span class="stat-number" data-target="98000">0</span>
+            <span class="stat-label">لعبة مدعومة</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <span class="stat-number" data-target="1000">0</span>
+            <span class="stat-label">مستخدم نشط</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-download"></i></div>
+            <span class="stat-number" data-target="50">0</span>
+            <span class="stat-label">تحديث شهري</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== قسم المميزات ========== -->
+  <section class="section features" id="features">
+    <div class="container">
+      <h2 class="section-title">مميزات <span class="gold">HANZO2TEAM</span></h2>
+      <p class="section-subtitle">لماذا تختار أداتنا؟</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <h3>شغّل بضغطة زر</h3>
+          <p>ما عليك إلا تضغط زر واحد والبرنامج يعمل كل شيء.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>آمن ومضمون</h3>
+          <p>البرنامج يحفظ نسخة من ملفاتك الأصلية ويرجعها لك وقت ما تحتاج.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-database"></i></div>
+          <h3>مئات الألعاب</h3>
+          <p>قاعدة بيانات ضخمة محدثة باستمرار تدعم أغلب الألعاب.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
+          <h3>وضع متقدم للمحترفين</h3>
+          <p>لمن عنده خبرة — تحكم كامل في الإعدادات والخيارات.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-globe"></i></div>
+          <h3>شغّل أونلاين</h3>
+          <p>تقدر تشغل الألعاب أونلاين بدون مشاكل.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-lock"></i></div>
+          <h3>حماية قوية</h3>
+          <p>البرنامج محمي ضد أي اختراق أو تتبع.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+          <h3>تحديثات تلقائية</h3>
+          <p>البرنامج يحدث نفسه بنفسك — دائماً وأحدث نسخة.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-language"></i></div>
+          <h3>عربي وإنجليزي</h3>
+          <p>واجهة كاملة بالعربية والإنجليزية، اختر اللي يناسبك.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== قسم كيفية الاستخدام ========== -->
+  <section class="section guide" id="guide">
+    <div class="container">
+      <h2 class="section-title">كيفية الاستخدام</h2>
+      <p class="section-subtitle">5 خطوات فقط للانطلاق</p>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="step-number"><i class="fas fa-shopping-cart"></i></div>
+          <div class="step-content">
+            <h3>اشترِ الترخيص</h3>
+            <p>اطلب الترخيص من خلال واتساب أو فيسبوك أو تلغرام.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-number"><i class="fas fa-download"></i></div>
+          <div class="step-content">
+            <h3>حمّل البرنامج</h3>
+            <p>حمّل البرنامج وشغّله على جهازك.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-number"><i class="fas fa-key"></i></div>
+          <div class="step-content">
+            <h3>فعّل الترخيص</h3>
+            <p>أدخل المفتاح اللي وصلك — البرنامج يربطه تلقائياً بجهازك.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-number"><i class="fas fa-plus-circle"></i></div>
+          <div class="step-content">
+            <h3>أضف لعبتك</h3>
+            <p>حط رابط اللعبة من متجر ستيم وانتظر التحميل.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-number"><i class="fas fa-play"></i></div>
+          <div class="step-content">
+            <h3>استمتع باللعب</h3>
+            <p>شغّل ستيم والعب أحلى الألعاب!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion: أسئلة شائعة -->
+      <h3 class="accordion-title">أسئلة شائعة</h3>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header">هل البرنامج آمن؟ <i class="fas fa-chevron-down"></i></button>
+          <div class="accordion-body"><p>نعم. البرنامج يحفظ نسخة من ملفات ستيم الأصلية ويرجعها لك لو احتجت. كل شيء مضمون.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">هل تشتغل مع كل الألعاب؟ <i class="fas fa-chevron-down"></i></button>
+          <div class="accordion-body"><p>البرنامج يدعم مئات الألعاب وفيه تحديثات باستمرار. بعض الألعاب تحتاج ملفات زيادة، والبرنامج يوفرها لك.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">وصار تحديث لستيم، هل يتأثر البرنامج؟ <i class="fas fa-chevron-down"></i></button>
+          <div class="accordion-body"><p>لا تقلق. البرنامج يرجع الملفات الأصلية تلقائياً قبل تحديث ستيم، وبعدها تقدر تشغله مرة أخرى بنقرة زر.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">أقدر ألعب أونلاين؟ <i class="fas fa-chevron-down"></i></button>
+          <div class="accordion-body"><p>أيوه. تقدر تشغل الألعاب أونلاين. البرنامج يكتشف الألعاب المثبتة ويدير كل شيء.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== جدول الباقات ========== -->
+  <section class="section pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title">ترخيص <span class="gold">دائمي</span></h2>
+      <p class="section-subtitle">اشتراك واحد فقط — مدى الحياة — بكل المميزات</p>
+      <div class="pricing-card">
+        <div class="pricing-badge">الأفضل</div>
+        <div class="pricing-header">
+          <h3>الترخيص الدائمي</h3>
+          <p class="pricing-sub">اشتراك لمرة واحدة — بدون تجديد</p>
+        </div>
+        <div class="pricing-price">
+          <span class="price">10,000</span>
+          <span class="currency">دينار</span>
+        </div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check-circle"></i> تفعيل كل الألعاب</li>
+          <li><i class="fas fa-check-circle"></i> دعم مئات الألعاب</li>
+          <li><i class="fas fa-check-circle"></i> حفظ واسترجاع الملفات الأصلية</li>
+          <li><i class="fas fa-check-circle"></i> إصلاح مشاكل الألعاب</li>
+          <li><i class="fas fa-check-circle"></i> وضع متخصص للمحترفين</li>
+          <li><i class="fas fa-check-circle"></i> تشغيل الألعاب أونلاين</li>
+          <li><i class="fas fa-check-circle"></i> دعم فني مخصص</li>
+          <li><i class="fas fa-check-circle"></i> تحديثات مستمرة</li>
+        </ul>
+        <button class="btn btn-gold pricing-btn" id="buyBtn">اشترِ الآن</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== نافذة عرض ترويجي ========== -->
+  <div class="promo-overlay" id="promoModal">
+    <div class="promo-box">
+      <button class="promo-close" id="promoClose"><i class="fas fa-times"></i></button>
+      <div class="promo-icon" id="promoIcon"><i class="fas fa-fire"></i></div>
+      <h3 class="promo-title" id="promoTitle">70$ للعبة واحدة؟! مو هواية؟</h3>
+      <p class="promo-desc" id="promoDesc">نص</p>
+      <div class="promo-timer" id="promoTimer"></div>
+      <button class="btn btn-gold promo-btn" id="promoBuyBtn">اطلب التفعيل الفوري</button>
+    </div>
+  </div>
+
+  <!-- ========== نافذة الدفع ========== -->
+  <div class="modal-overlay" id="buyModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <div class="modal-icon"><i class="fas fa-shopping-cart"></i></div>
+      <h3 class="modal-title">تواصل مع أحد القنوات للشراء</h3>
+      <p class="modal-desc">اختر القناة التي تناسبك للتواصل وإتمام عملية الشراء</p>
+      <div class="modal-channels">
+        <a href="https://wa.me/9647828525213" target="_blank" class="channel-btn whatsapp">
+          <i class="fab fa-whatsapp"></i> واتساب
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61591160105423" target="_blank" class="channel-btn facebook">
+          <i class="fab fa-facebook-f"></i> فيسبوك
+        </a>
+        <a href="https://t.me/Hanzo_2team" target="_blank" class="channel-btn telegram">
+          <i class="fab fa-telegram-plane"></i> تلغرام
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== قسم الدعم والتواصل ========== -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">الدعم والتواصل</h2>
+      <p class="section-subtitle">نحن هنا لمساعدتك</p>
+      <div class="contact-grid">
+        <form class="contact-form" id="contactForm">
+          <input type="text" placeholder="الاسم" required>
+          <input type="email" placeholder="البريد الإلكتروني" required>
+          <textarea rows="5" placeholder="رسالتك... استفسار، مشكلة، اقتراح" required></textarea>
+          <button type="submit" class="btn btn-gold">إرسال</button>
+        </form>
+        <div class="contact-info">
+          <div class="info-item"><i class="fas fa-envelope"></i> HANZO2TEAM@gmail.com</div>
+          <div class="info-item"><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/profile.php?id=61591160105423" target="_blank" class="contact-link">فيسبوك</a></div>
+          <div class="info-item"><i class="fab fa-discord"></i> <a href="https://discord.gg/ZWuAcgcBXJ" target="_blank" class="contact-link">ديسكورد</a></div>
+          <div class="info-item"><i class="fab fa-telegram-plane"></i> <a href="https://t.me/HANZO2TEAM_C" target="_blank" class="contact-link">تلغرام</a></div>
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61591160105423" target="_blank" class="social-link" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://discord.gg/ZWuAcgcBXJ" target="_blank" class="social-link" title="ديسكورد"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/HANZO2TEAM_C" target="_blank" class="social-link" title="تلغرام"><i class="fab fa-telegram-plane"></i></a>
+          </div>
+          <p class="contact-note">بعد الدفع ستحصل على المفتاح مباشرة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== التذييل ========== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">HANZO<span class="gold">2</span>TEAM</div>
+      <p>&copy; 2026 HANZO2TEAM — جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

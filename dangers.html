@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANZO2TEAM – التحقيق الكامل في أدوات ستيم المجانية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { cursor: default; }
+    .page-wrap { padding-top: 90px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #ffb320; text-decoration: none; font-weight: 600;
+      margin-bottom: 24px; transition: opacity 0.3s; font-size: 0.9rem;
+    }
+    .back-link:hover { opacity: 0.7; cursor: pointer; }
+
+    /* ============================
+       CURSORS BY SEVERITY
+    ============================ */
+    .cursor-info { cursor: help !important; }
+    .cursor-info * { cursor: help !important; }
+    .cursor-warn { cursor: cell !important; }
+    .cursor-warn * { cursor: cell !important; }
+    .cursor-danger { cursor: crosshair !important; }
+    .cursor-danger * { cursor: crosshair !important; }
+    .cursor-critical { cursor: not-allowed !important; }
+    .cursor-critical * { cursor: not-allowed !important; }
+    .cursor-alert { cursor: text !important; }
+    .cursor-alert * { cursor: text !important; }
+
+    /* ============================
+       HERO
+    ============================ */
+    .investigation-hero {
+      background: linear-gradient(135deg, #0d0d18, #0a0a12);
+      border: 1px solid rgba(255,179,32,0.08);
+      border-radius: 24px; padding: 50px 44px; margin-bottom: 44px;
+      text-align: center; position: relative; overflow: hidden;
+      cursor: help;
+    }
+    .investigation-hero::before {
+      content: ''; position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,50,50,0.04) 0%, transparent 70%);
+      top: -150px; right: -150px;
+    }
+    .investigation-hero .badge {
+      display: inline-block; background: rgba(255,50,50,0.12); color: #ff5555;
+      padding: 4px 18px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 1px; margin-bottom: 16px; border: 1px solid rgba(255,50,50,0.15);
+    }
+    .investigation-hero h1 {
+      font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px;
+    }
+    .investigation-hero h1 .hl-red { color: #ff5555; }
+    .investigation-hero p {
+      color: rgba(255,255,255,0.5); font-size: 1rem; max-width: 700px;
+      margin: 0 auto; line-height: 1.8;
+    }
+
+    /* ============================
+       STORY SECTION
+    ============================ */
+    .story-section {
+      background: linear-gradient(135deg, rgba(255,179,32,0.03), rgba(255,179,32,0.01));
+      border: 1px solid rgba(255,179,32,0.06);
+      border-radius: 20px; padding: 36px 40px; margin-bottom: 44px;
+    }
+    .story-section h2 {
+      font-size: 1.3rem; font-weight: 700; color: #ffb320;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .story-section p {
+      color: rgba(255,255,255,0.6); font-size: 0.98rem; line-height: 2;
+      margin-bottom: 14px;
+    }
+    .story-section p:last-child { margin-bottom: 0; }
+    .story-section strong { color: #fff; }
+    .story-section .hl-gold { color: #ffb320; }
+    .story-section .quote {
+      border-right: 3px solid rgba(255,179,32,0.2);
+      padding: 14px 20px; margin: 16px 0; background: rgba(255,179,32,0.03);
+      border-radius: 0 12px 12px 0; color: rgba(255,255,255,0.5); font-style: italic;
+    }
+
+    /* ============================
+       KEY DIFFERENCE BOX
+    ============================ */
+    .diff-box {
+      background: linear-gradient(135deg, rgba(255,179,32,0.04), rgba(255,179,32,0.01));
+      border: 1px solid rgba(255,179,32,0.1); border-radius: 20px;
+      padding: 30px 34px; margin-bottom: 44px; border-right: 4px solid #ffb320;
+      cursor: cell;
+    }
+    .diff-box h3 {
+      color: #fff; font-size: 1.15rem; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .diff-box p {
+      color: rgba(255,255,255,0.55); line-height: 1.9; font-size: 0.95rem;
+    }
+
+    /* ============================
+       CRITICAL CARD
+    ============================ */
+    .critical-card {
+      background: linear-gradient(135deg, rgba(255,50,50,0.06), rgba(200,0,0,0.02));
+      border: 1px solid rgba(255,50,50,0.12);
+      border-radius: 20px; padding: 32px 36px; margin-bottom: 32px;
+      border-right: 4px solid #ff3333;
+      cursor: not-allowed;
+    }
+    .critical-card .label {
+      display: inline-block; background: rgba(255,50,50,0.15); color: #ff5555;
+      font-size: 0.7rem; font-weight: 800; padding: 3px 14px; border-radius: 50px;
+      letter-spacing: 1px; margin-bottom: 10px;
+    }
+    .critical-card h3 {
+      font-size: 1.25rem; font-weight: 700; color: #ff5555;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .critical-card p {
+      color: rgba(255,255,255,0.55); line-height: 1.9; font-size: 0.95rem;
+    }
+    .critical-card code {
+      background: rgba(0,0,0,0.3); padding: 2px 10px; border-radius: 6px;
+      color: #ffb320; font-size: 0.85rem;
+    }
+
+    /* ============================
+       SECTION HEADER
+    ============================ */
+    .sec-header {
+      display: flex; align-items: center; gap: 12px; margin: 44px 0 22px;
+      padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .sec-header h2 {
+      font-size: 1.3rem; font-weight: 700; color: #fff; margin: 0;
+    }
+    .sec-header .count {
+      background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3);
+      font-size: 0.75rem; padding: 2px 12px; border-radius: 50px;
+    }
+
+    /* ============================
+       EXPANDABLE CARDS
+    ============================ */
+    .expand-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 18px; margin-bottom: 12px; overflow: hidden;
+      transition: all 0.35s ease;
+    }
+    .expand-card:hover { border-color: rgba(255,255,255,0.08); }
+    .expand-card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 24px; cursor: pointer; user-select: none;
+      transition: background 0.3s;
+    }
+    .expand-card-header:hover { background: rgba(255,255,255,0.02); }
+    .expand-card-header .ec-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .expand-card-header .ec-icon.critical { background: rgba(255,50,50,0.1); color: #ff5555; }
+    .expand-card-header .ec-icon.high { background: rgba(255,140,0,0.1); color: #ff8c00; }
+    .expand-card-header .ec-icon.medium { background: rgba(255,179,32,0.1); color: #ffb320; }
+    .expand-card-header .ec-icon.info { background: rgba(100,150,255,0.1); color: #6a9aff; }
+    .expand-card-header .ec-info { flex: 1; }
+    .expand-card-header .ec-info .ec-title {
+      color: #fff; font-weight: 600; font-size: 0.95rem; margin-bottom: 2px;
+    }
+    .expand-card-header .ec-info .ec-sub {
+      color: rgba(255,255,255,0.3); font-size: 0.8rem;
+    }
+    .expand-card-header .ec-toggle {
+      color: rgba(255,255,255,0.2); font-size: 0.8rem;
+      transition: transform 0.3s;
+    }
+    .expand-card.open .expand-card-header .ec-toggle {
+      transform: rotate(180deg);
+    }
+    .expand-card-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s ease, padding 0.45s ease;
+      padding: 0 24px;
+    }
+    .expand-card.open .expand-card-body {
+      max-height: 2000px; padding: 0 24px 22px;
+    }
+    .expand-card-body p {
+      color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.8; margin-bottom: 10px;
+    }
+    .expand-card-body ul {
+      list-style: none; padding: 0; margin: 6px 0 10px;
+    }
+    .expand-card-body ul li {
+      color: rgba(255,255,255,0.45); font-size: 0.88rem;
+      padding: 6px 0; padding-right: 20px; position: relative; line-height: 1.6;
+    }
+    .expand-card-body ul li::before {
+      content: '›'; position: absolute; right: 0; color: rgba(255,179,32,0.4); font-weight: 700;
+    }
+    .expand-card-body ul li strong { color: rgba(255,255,255,0.7); }
+    .expand-card-body code {
+      background: rgba(0,0,0,0.25); padding: 1px 8px; border-radius: 4px;
+      color: #ffb320; font-size: 0.82rem;
+    }
+    .inline-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 10px;
+      border-radius: 50px; margin-left: 4px;
+    }
+    .inline-tag.red { background: rgba(255,50,50,0.12); color: #ff5555; }
+    .inline-tag.orange { background: rgba(255,140,0,0.12); color: #ff8c00; }
+    .inline-tag.gold { background: rgba(255,179,32,0.12); color: #ffb320; }
+    .inline-tag.blue { background: rgba(100,150,255,0.12); color: #6a9aff; }
+    table.mini {
+      width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.82rem;
+    }
+    table.mini th {
+      text-align: right; color: rgba(255,255,255,0.3); font-weight: 600;
+      padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    table.mini td {
+      padding: 4px 8px; color: rgba(255,255,255,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    table.mini .key { color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    /* ============================
+       COMPARISON TABLE
+    ============================ */
+    .compare-wrap {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 20px; padding: 32px; margin-bottom: 44px;
+    }
+    .compare-wrap h2 {
+      text-align: center; font-size: 1.4rem; font-weight: 700; color: #fff;
+      margin-bottom: 4px;
+    }
+    .compare-wrap .sub {
+      text-align: center; color: rgba(255,255,255,0.35); font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .compare-table {
+      width: 100%; border-collapse: separate; border-spacing: 0 6px;
+    }
+    .compare-table th {
+      padding: 14px 18px; font-weight: 700; font-size: 0.85rem; color: #fff;
+      background: rgba(255,255,255,0.03); text-align: center;
+    }
+    .compare-table th:first-child { text-align: right; border-radius: 0 12px 12px 0; }
+    .compare-table th:last-child { border-radius: 12px 0 0 12px; }
+    .compare-table td {
+      padding: 13px 18px; font-size: 0.88rem; color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.02); text-align: center;
+    }
+    .compare-table td:first-child {
+      text-align: right; font-weight: 600; color: rgba(255,255,255,0.75);
+      border-radius: 0 10px 10px 0;
+    }
+    .compare-table td:last-child { border-radius: 10px 0 0 10px; }
+    .compare-table .tag-safe {
+      display: inline-block; background: rgba(50,180,50,0.1); color: #4caf50;
+      padding: 2px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+    }
+    .compare-table .tag-danger {
+      display: inline-block; background: rgba(255,50,50,0.12); color: #ff5555;
+      padding: 2px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+    }
+    .compare-table .tag-warn {
+      display: inline-block; background: rgba(255,179,32,0.1); color: #ffb320;
+      padding: 2px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+    }
+    .compare-table .no-badge {
+      display: inline-block; background: rgba(255,50,50,0.1); color: #ff5555;
+      padding: 2px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+    }
+
+    /* ============================
+       SOURCE
+    ============================ */
+    .source-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04); border-radius: 14px;
+      padding: 20px 24px; text-align: center; margin-bottom: 40px;
+    }
+    .source-box .label { color: rgba(255,255,255,0.25); font-size: 0.75rem; margin-bottom: 6px; }
+    .source-box a {
+      color: #ffb320; font-weight: 600; text-decoration: none; font-size: 0.92rem;
+    }
+    .source-box a:hover { text-decoration: underline; }
+
+    /* ============================
+       TOOLS SUB CARDS
+    ============================ */
+    .tools-sub {
+      display: flex; flex-direction: column; gap: 12px; margin-top: 16px;
+    }
+    .tools-sub .t-item {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.02); padding: 14px 18px;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);
+    }
+    .tools-sub .t-item .t-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .tools-sub .t-item .t-icon.lightning { background: rgba(255,179,32,0.1); color: #ffb320; }
+    .tools-sub .t-item .t-icon.lua { background: rgba(50,100,255,0.1); color: #5c8aff; }
+    .tools-sub .t-item .t-info { flex: 1; }
+    .tools-sub .t-item .t-info .t-name { color: #fff; font-weight: 600; font-size: 0.92rem; }
+    .tools-sub .t-item .t-info .t-desc { color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+    .tools-sub .t-item .t-badge {
+      background: rgba(255,50,50,0.12); color: #ff5555;
+      font-size: 0.65rem; font-weight: 700; padding: 3px 12px;
+      border-radius: 50px; white-space: nowrap;
+    }
+
+    /* ============================
+       STATS ROW
+    ============================ */
+    .stats-row {
+      display: flex; gap: 16px; margin-bottom: 44px; flex-wrap: wrap;
+    }
+    .stat-card {
+      flex: 1; min-width: 140px;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px; padding: 20px; text-align: center;
+    }
+    .stat-card .s-num {
+      font-size: 1.6rem; font-weight: 800; color: #fff;
+    }
+    .stat-card .s-num.red { color: #ff5555; }
+    .stat-card .s-num.gold { color: #ffb320; }
+    .stat-card .s-num.orange { color: #ff8c00; }
+    .stat-card .s-label {
+      color: rgba(255,255,255,0.3); font-size: 0.75rem; margin-top: 4px;
+    }
+
+    /* ============================
+       TIP BOX
+    ============================ */
+    .tip-box {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(100,200,100,0.03); border: 1px solid rgba(100,200,100,0.08);
+      border-radius: 14px; padding: 18px 22px; margin: 16px 0;
+    }
+    .tip-box .tip-icon { color: #4caf50; font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-box p { color: rgba(255,255,255,0.5); font-size: 0.88rem; line-height: 1.7; margin: 0 !important; }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 768px) {
+      .investigation-hero { padding: 32px 22px; }
+      .investigation-hero h1 { font-size: 1.4rem; }
+      .story-section { padding: 24px 18px; }
+      .critical-card { padding: 24px 18px; }
+      .compare-wrap { padding: 18px 12px; }
+      .compare-table th, .compare-table td { padding: 10px 10px; font-size: 0.78rem; }
+      .expand-card-header { padding: 14px 16px; }
+      .expand-card-body { padding: 0 16px; }
+      .expand-card.open .expand-card-body { padding: 0 16px 18px; }
+      .stats-row { gap: 10px; }
+      .stat-card { min-width: 100px; padding: 14px; }
+      .stat-card .s-num { font-size: 1.2rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">HANZO<span class="gold">2</span>TEAM</a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+        <li><a href="help.html" class="nav-link nav-help">مساعدة وحلول</a></li>
+        <li><a href="policy.html" class="nav-link nav-policy">سياسة الحظر</a></li>
+        <li><a href="index.html#pricing" class="nav-link">السعر</a></li>
+        <li><a href="index.html#contact" class="nav-link">الدعم</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container page-wrap">
+
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> الرجوع للرئيسية</a>
+
+    <!-- ========== HEADER ========== -->
+    <div class="investigation-hero">
+      <div class="badge"><i class="fas fa-shield-alt"></i>  تحقيق أمني مستقل</div>
+      <h1>التقرير الكامل: ماذا تخفي أدوات ستيم <span class="hl-red">المجانية</span>؟</h1>
+      <p>تحليل برمجي متعمق لـ SteamTools v1.8.30 – تم فك جميع الملفات، تتبع مسارات الشبكة، وتحليل قاعدة البيانات. هذي الصفحة تلخّص 26 قسم من التقرير الكامل على GitHub.</p>
+    </div>
+
+    <!-- ========== QUICK STATS ========== -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="s-num red">18</div><div class="s-label">ملفاً يُسقطها المثبّت</div></div>
+      <div class="stat-card"><div class="s-num gold">3</div><div class="s-label">خوادم تحديث</div></div>
+      <div class="stat-card"><div class="s-num orange">1</div><div class="s-label">باب خلفي (HttpLoadDLL)</div></div>
+      <div class="stat-card"><div class="s-num red">1</div><div class="s-label">شركة وهمية (Vale Corp)</div></div>
+      <div class="stat-card"><div class="s-num gold">5</div><div class="s-label">مراحل الهجوم</div></div>
+    </div>
+
+    <!-- ========== STORY ========== -->
+    <div class="story-section">
+      <h2><i class="fas fa-microscope"></i> ليش حللنا البرنامج؟</h2>
+      <p>البداية كانت من منشورات فيسبوكية وأشخاص يشتكون من أن حسابات ستيم نهبوا واخترقت بعد استخدام أدوات مجانية. كثير ناس فقدوا مكتبات ألعاب كاملة بنيت على مدار سنين — مئات الدولارات ضاعت في ثواني.</p>
+      <p>هنا قررنا نفتح <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIar6Xu0z1LqmefBRnb_wlTnmyZvB5sOPx-haZ74TYQ&s=10" alt="SteamTools" style="width:20px;height:20px;vertical-align:middle;border-radius:4px;"> <strong>SteamTools</strong> (الإصدار 1.8.30) ونتعمق في الكود المصدري: وش بالضبط يشتغل داخل جهاز الضحية؟ هل هو مجرد أداة فتح ألعاب، ولا فيه شي أسوأ؟</p>
+      <div class="quote">
+        <i class="fas fa-quote-right"></i> "في ثواني معدودة، لقينا شي ما توقعناه — باب خلفي كامل يسمح لمطوري الأداة بتحميل أي فيروس يبغونه على جهاز الضحية في أي لحظة."
+      </div>
+      <p>التحليل استغرق أياماً من فحص الملفات، تفكيك الكود، تتبع مسارات الشبكة، وتحليل قواعد البيانات المخفية. النتيجة <strong class="hl-gold">مو توقعات</strong> — إنها حقائق مثبتة من الكود نفسه، منشورة على GitHub مع جميع الملفات والتوقيعات والتجزئة (SHA-256).</p>
+    </div>
+
+    <!-- ========== KEY DIFFERENCE ========== -->
+    <div class="diff-box">
+      <span style="background: rgba(255,179,32,0.12); color: #ffb320; font-size: 0.7rem; font-weight: 800; padding: 3px 14px; border-radius: 50px; letter-spacing: 1px; display: inline-block; margin-bottom: 8px;">الفرق الجوهري</span>
+      <h3><i class="fas fa-exchange-alt" style="color: #ffb320;"></i> HANZO2TEAM لا يحقن ملفات — يعترض اتصال ستيم</h3>
+      <p>
+        <strong style="color: #ff5555;">SteamTools, Project-Lightning و Lua Tool:</strong> تحقن ملفات <code>.dll</code> و <code>.exe</code> <strong>داخل ذاكرة الألعاب</strong>. الملفات تجري داخل برنامج اللعبة بصلاحيات كاملة وتقدر تسوي أي شي.<br><br>
+        <strong style="color: #4caf50;">HANZO2TEAM:</strong> ما يحقن أي ملف في اللعبة أبداً. <strong>يعترض اتصال ستيم</strong> نفسه على مستوى النظام — يوجّه طلبات الشبكة بس بدون ما يلمس ذاكرة اللعبة أو ملفاتها.
+      </p>
+    </div>
+
+    <!-- ========== PROJECT-LIGHTNING & LUA TOOL ========== -->
+    <div class="story-section" style="border-color: rgba(255,50,50,0.12);">
+      <h2><i class="fas fa-code-branch"></i> Project-Lightning و Lua Tool</h2>
+      <p>هذول <strong>مو أدوات جديدة</strong> — <strong class="hl-gold">Project-Lightning</strong> و <strong class="hl-gold">Lua Tool</strong> مبنيين كلياً على نفس ملفات SteamTools. الفرق الوحيد: واجهة مختلفة، بس تحت الغطاء نفس الكود، نفس <code>Core.dll</code>، ونفس <strong>HttpLoadDLL</strong>.</p>
+      <p>ملفات الإنجكشن نفسها نسخ طبق الأصل — بعضها بنفس التوقيع الرقمي، وبعضها بدون توقيع.</p>
+      <div class="tools-sub">
+        <div class="t-item">
+          <div class="t-icon lightning"><i class="fas fa-bolt"></i></div>
+          <div class="t-info">
+            <div class="t-name">Project-Lightning</div>
+            <div class="t-desc">مبني على SteamTools — نفس Core.dll، نفس HttpLoadDLL، نفس المخاطر</div>
+          </div>
+          <span class="t-badge"><i class="fas fa-skull"></i> خطر</span>
+        </div>
+        <div class="t-item">
+          <img src="https://wiki.lua.tools/img/icon.svg" alt="Lua Tool" style="width:38px;height:38px;border-radius:10px;flex-shrink:0;">
+          <div class="t-info">
+            <div class="t-name">Lua Tool</div>
+            <div class="t-desc">يستخدم نفس محرك Lua وملفات الإنجكشن — باب خلفي مفتوح مثل SteamTools</div>
+          </div>
+          <span class="t-badge"><i class="fas fa-skull"></i> خطر</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!--                          ONLINE-FIX.ME                               -->
+    <!-- =================================================================== -->
+    <div style="text-align:center;margin:60px 0 30px;position:relative;">
+      <div style="border-top:1px solid rgba(255,255,255,0.04);"></div>
+      <div style="display:inline-block;background:#0a0a0f;padding:0 18px;position:relative;top:-12px;">
+        <span style="background:rgba(255,140,0,0.12);color:#ff8c00;font-size:0.65rem;font-weight:800;padding:3px 14px;border-radius:50px;letter-spacing:1px;">تحليل منفصل</span>
+      </div>
+    </div>
+
+    <div class="investigation-hero" style="border-color:rgba(255,140,0,0.1);">
+      <div class="badge" style="background:rgba(255,140,0,0.12);color:#ff8c00;border-color:rgba(255,140,0,0.15);"><i class="fas fa-exclamation-triangle"></i>  موقع خطر</div>
+      <h1 style="font-size:1.7rem;">Online-Fix.me <span class="hl-red">ليس آمناً</span></h1>
+      <p>موقع روسي يقدّم "فكسات" لتشغيل الألعاب المخترقة أونلاين. يدّعي الأمان — لكن تحليل VirusTotal يكشف الحقيقة.</p>
+    </div>
+
+    <div class="story-section" style="border-color:rgba(255,140,0,0.15);">
+      <h2><i class="fas fa-globe"></i> موقع "آمن" — تحليل VirusTotal</h2>
+      <p>موقع <strong class="hl-gold">Online-Fix.me</strong> موقع روسي يقدّم "فكسات" (fixes) تسمح بلعب الألعاب المخترقة <strong>أونلاين</strong> مع الآخرين — يعني يخترق الحماية الجماعية متعددة اللاعبين. يدّعي أنه آمن، لكن التحليل يكشف غير ذلك.</p>
+      <p>نمط الكشف نموذجي لأدوات الكراك/التفعيل المزوّرة — التصنيفات <span class="inline-tag red">Crack</span> <span class="inline-tag red">HackTool</span> <span class="inline-tag red">ABApplication</span> <span class="inline-tag red">ApplicUnwnt</span> <span class="inline-tag red">PUA</span> كلها إشارات على أن هذا برنامج "تفعيل/كسر حماية" غير رسمي، وهذا النوع غالباً ما يكون مرفقاً ببرمجيات ضارة إضافية.</p>
+      <p><strong>نتائج التحليل (~20 محرك من أصل 70 يصنفونه كخطر):</strong></p>
+      <table class="mini" style="width:100%;margin-bottom:12px;">
+        <tr><th class="key">محرك الكشف</th><th>التصنيف</th><th>نسبة الثقة</th></tr>
+        <tr><td><strong>Cynet</strong></td><td><span class="inline-tag red">Malicious</span></td><td>100%</td></tr>
+        <tr><td><strong>Elastic</strong></td><td><span class="inline-tag red">Malicious</span></td><td>عالية جداً</td></tr>
+        <tr><td><strong>CrowdStrike Falcon</strong></td><td><span class="inline-tag orange">Grayware</span></td><td>90%</td></tr>
+        <tr><td><strong>SentinelOne</strong></td><td><span class="inline-tag orange">مشبوه (AI)</span></td><td>تحليل ذكاء اصطناعي</td></tr>
+        <tr><td><strong>Skyhigh</strong></td><td><span class="inline-tag red">Dropper</span></td><td>سلوك تنزيل ملفات</td></tr>
+      </table>
+      <p><span class="inline-tag red">مؤشر Dropper</span> مقلق جداً — يعني الملف <strong>ينزّل حمولة إضافية</strong> بعد التشغيل. هذا سلوك شائع في أدوات الكراك المزيفة المستخدمة لتوزيع <strong>برمجيات تجسس أو فدية</strong>.</p>
+      <p><strong>ملاحظة مهمة:</strong> عدم كشف المحركات الكبرى (Microsoft, Kaspersky, BitDefender) <strong>لا يعني الأمان</strong> — أدوات الكراك تصمَّم عمداً لتفادي هذه المحركات تحديداً، أو أن الشركات الكبرى تتساهل أحياناً مع "Riskware" العام.</p>
+      <div class="tip-box" style="border-color:rgba(100,200,100,0.15);background:rgba(100,200,100,0.03);margin-top:20px;">
+        <div class="tip-icon" style="color:#4caf50;"><i class="fas fa-shield-alt"></i></div>
+        <p><strong style="color:#4caf50;">مقارنة مع HANZO2TEAM:</strong> برنامجنا <strong>لم يتم رصده أبداً</strong> في أي فحص VirusTotal — 0 كشف، 0 اكتشاف، 0 تصنيف. ليس لأننا نختبئ، بل لأن محتويات الملفات <strong>نظيفة بالكامل</strong>. لا أكواد حقن، لا بابات خلفية، لا تشفير خبيث، لا Dropper. الفرق بين النظافة الحقيقية والتضليل.</p>
+      </div>
+      <div class="tip-box" style="border-color:rgba(255,140,0,0.15);background:rgba(255,140,0,0.03);">
+        <div class="tip-icon" style="color:#ff8c00;"><i class="fas fa-exclamation-triangle"></i></div>
+        <p><strong style="color:#fff;">الخلاصة:</strong> Online-Fix.me ليس موقعاً آمناً — إنه منصة لتوزيع كراكات تخترق خاصية تعدد اللاعبين في ستيم، مع مؤشرات <strong>Dropper</strong> و <strong>Malicious</strong> من محركات متخصصة. أي ملف تحمّله منه يحمل خطر سرقة حسابك أو اختراق جهازك.</p>
+      </div>
+    </div>
+
+    <!-- ===== سؤال منطقي خاص بـ Online-Fix ===== -->
+    <div style="background:linear-gradient(135deg,rgba(255,179,32,0.03),rgba(255,140,0,0.01));border:1px solid rgba(255,140,0,0.1);border-radius:20px;padding:32px 36px;margin-bottom:44px;border-right:4px solid #ff8c00;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <span style="background:rgba(255,140,0,0.12);color:#ff8c00;font-size:0.7rem;font-weight:800;padding:3px 14px;border-radius:50px;letter-spacing:1px;display:inline-flex;align-items:center;gap:6px;"><i class="fas fa-question-circle"></i> سؤال منطقي</span>
+      </div>
+      <h3 style="color:#fff;font-size:1.1rem;margin-bottom:12px;">طيب، ليش الملف ما يجي كامل وجاهز من أول يوم؟</h3>
+      <p style="color:rgba(255,255,255,0.55);line-height:2;font-size:0.95rem;">
+        لو كان هدف Online-Fix هو مساعدتك على اللعب أونلاين فقط، <strong>ليه يحتاج تحميل ملفات إضافية من السيرفر بعد التثبيت؟</strong> ليه ما تضمّن كل شي في المثبّت وقدّمه لك مرة واحدة؟<br><br>
+        <strong style="color:#ffb320;">"لأن الملف اللي يعطيك إياه اليوم مو لازم يكون نفس الملف اللي يشتغل بكره."</strong><br><br>
+        لو النية نظيفة، كان الملف يجي <strong>كامل ومتكامل</strong> منذ البداية. لكن النظام المعتمد على تحميل ملفات إضافية بعد التشغيل (<strong>Dropper</strong>) ما له أي فائدة إلا شي واحد: <strong>التحكم عن بُعد</strong>. المطور يبقي السيرفر تحت سيطرته عشان يقدر:<br><br>
+        • يغيّر اللي يشتغل على جهازك في <strong>أي لحظة</strong><br>
+        • يضيف وظائف خبيثة <strong>بعد ما تثق في البرنامج</strong><br>
+        • يتجاوز برامج الحماية لأن الملفات <strong>جديدة وما شافتها التحليلات</strong><br>
+        • يوزع حمولات مختلفة لأشخاص مختلفين (فيروس فدية لشخص، متصيد عملات لآخر)<br><br>
+        <span style="color:#ff8c00;font-weight:700;">الخلاصة المنطقية:</span> لو كان موقع Online-Fix نظيفاً، ما كان يحتاج نظام Dropper أساساً. الملف النظيف يُعطى كامل جاهز — والملف اللي يحتاج <strong>ينزّل أجزاء من السيرفر</strong> يخبّي شي.
+      </p>
+    </div>
+
+    <div class="critical-card">
+      <div class="label"><i class="fas fa-skull"></i>  خطر مميت</div>
+      <h3><i class="fas fa-door-open"></i> HttpLoadDLL — الباب الخلفي في <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIar6Xu0z1LqmefBRnb_wlTnmyZvB5sOPx-haZ74TYQ&s=10" alt="SteamTools" style="width:18px;height:18px;vertical-align:middle;border-radius:3px;"> SteamTools</h3>
+      <p>في قلب <code>Core.dll</code>، وجدنا دالة اسمها <strong>HttpLoadDLL</strong>:</p>
+      <p>
+      • تطلب ملف <strong>DLL</strong> من سيرفر صيني<br>
+      • تفك <strong>تشفيره</strong> — الملف يصل مشفر عشان ما ينكشف<br>
+      • <strong>تحمّله</strong> في ذاكرة جهازك عبر <code>LoadLibraryA</code><br>
+      • <strong>تشغّله</strong> عبر <code>GetProcAddress</code> — أي كود يبغونه<br><br>
+      المطور يقدر يرسل <strong>فيروس فدية، متصيد عملات، برنامج تجسس</strong> — أي شي. النصوص المضمنة في الكود تؤكد:<br>
+      <code>"HttpLoadDLL called"</code>, <code>"Downloaded and decrypted data successfully"</code>, <code>"FileName"</code>, <code>"Hash"</code>, <code>"package/branch"</code>, <code>"WindowsFile64"</code>.
+      </p>
+    </div>
+
+    <!-- ========== EXPANDABLE: ALL DETAILS ========== -->
+    <div class="sec-header">
+      <h2>التفاصيل الكاملة للتحليل</h2>
+      <span class="count">26 قسم</span>
+    </div>
+    <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem; margin: -12px 0 22px;">اضغط على أي قسم لتوسيعه وعرض التفاصيل الكاملة</p>
+
+    <div class="expand-section" id="expandSection">
+
+      <!-- 1. ملفات المثبّت -->
+      <div class="expand-card">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon info"><i class="fas fa-archive"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">الملفات اللي يسقطها المثبّت</div>
+            <div class="ec-sub">18 ملفاً في 4 مجلدات — 10.6 ميغابايت</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>المثبّت <code>st-setup-1.8.30.exe</code> (NSIS 3 Unicode) يسقط الملفات التالية:</p>
+          <table class="mini">
+            <tr><th class="key">الملف</th><th>الحجم</th><th>الغرض</th></tr>
+            <tr><td><code>SteamTools.exe</code></td><td>1.83 MB</td><td>البرنامج الرئيسي <span class="inline-tag red">غير موقَّع</span></td></tr>
+            <tr><td><code>Core.dll</code></td><td>658 KB</td><td>المحرك الخطير — باب خلفي، تشفير، شبكة</td></tr>
+            <tr><td><code>Qt5Core.dll</code></td><td>6 MB</td><td>إطار كيو تي — مكتبة عمرها 5+ سنوات</td></tr>
+            <tr><td><code>Qt5Gui.dll</code></td><td>7 MB</td><td>واجهات كيو تي</td></tr>
+            <tr><td><code>Qt5Widgets.dll</code></td><td>5.5 MB</td><td>أدوات واجهة كيو تي</td></tr>
+            <tr><td><code>Qt5Network.dll</code></td><td>1.3 MB</td><td>شبكات كيو تي</td></tr>
+            <tr><td><code>Qt5Svg.dll</code></td><td>330 KB</td><td>رسومات SVG</td></tr>
+            <tr><td><code>msvcp140.dll</code> <span style="color:rgba(255,255,255,0.3);">و 3 ملفات أخرى</span></td><td>~787 KB</td><td>مكتبات سي++ من 2025</td></tr>
+            <tr><td><code>qwindows.dll</code></td><td>1.4 MB</td><td>إضافة نافذة كيو تي</td></tr>
+            <tr><td><code>qico.dll</code></td><td>38 KB</td><td>إضافة أيقونات</td></tr>
+          </table>
+          <p><strong>ملاحظة:</strong> مكتبات Qt5 من نوفمبر 2020 — فيها ثغرات أمنية معروفة (CVEs) غير مصحّحة. الملف الوحيد الموقَّع بشهادة EV هو <code>Core.dll</code> — الـ EXE الرئيسي <span class="inline-tag red">غير موقَّع</span>.</p>
+        </div>
+      </div>
+
+      <!-- 2. التوقيع الرقمي -->
+      <div class="expand-card cursor-danger">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon critical"><i class="fas fa-certificate"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">التوقيع الرقمي — شهادة EV مخادعة</div>
+            <div class="ec-sub">GlobalSign EV Code Signing — NewWnight Global Tech Co., Ltd</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>المثبّت و <code>Core.dll</code> موقَّعان بشهادة <strong>Extended Validation (EV)</strong> من GlobalSign — أغلى وأوثق نوعية شهادات. الشركة المصدرة:</p>
+          <ul>
+            <li><strong>الاسم:</strong> NewWnight Global Tech Co., Ltd</li>
+            <li><strong>الموقع:</strong> Changsha, Hunan, China</li>
+            <li><strong>السجل التجاري:</strong> 91430103MADWKFRYXD</li>
+            <li><strong>صلاحية الشهادة:</strong> ديسمبر 2025 – ديسمبر 2026</li>
+          </ul>
+          <p><span class="inline-tag red">تنبيه:</span> الـ EXE الرئيسي <strong>غير موقَّع</strong> — يقدر يتغير بأي وقت بدون ما تنكسر الشهادة. الشركة "NewWnight" ما عندها وجود ويب فعلي، وتظهر أنها أُنشئت خصيصاً لهذه الأداة.</p>
+        </div>
+      </div>
+
+      <!-- 3. Vale Corporation -->
+      <div class="expand-card cursor-alert">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon critical"><i class="fas fa-mask"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">خداع "Vale Corporation"</div>
+            <div class="ec-sub">انتحال هوية Valve — حرف واحد ناقص</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>في خصائص <code>Core.dll</code>: <strong>Company Name</strong> = "Vale Corporation"، <strong>Product Name</strong> = "Vale" — بينما الشركة الحقيقية هي Valve. الفرق: حرف V الثاني ناقص (Valve → Vale).</p>
+          <ul>
+            <li><strong>الهدف:</strong> خداع المختصين — يبدو كأنه توقيع Valve الرسمي</li>
+            <li><strong>الخدعة:</strong> توفر "إنكار معقول" — "لا مو Valve، هذي Vale"</li>
+            <li><strong>التدليس متعمَّد</strong> — اسم الشركة الحقيقي في الشهادة NewWnight، مو Vale</li>
+          </ul>
+          <p>كمان <code>Core.dll</code> يسجل نفسه في النظام باسم <strong>"Vale Corporation"</strong> وينتحل قنوات IPC باسم <code>Valve_SteamIPC_Class</code>.</p>
+        </div>
+      </div>
+
+      <!-- 4. سرقة الحسابات -->
+      <div class="expand-card cursor-critical">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon critical"><i class="fas fa-user-secret"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">سرقة بيانات حسابات ستيم</div>
+            <div class="ec-sub">قراءة loginusers.vdf — كل الحسابات المسجلة بالجهاز</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>البرنامج يقرأ ملفات ستيم التالية <strong>بدون علم المستخدم</strong>:</p>
+          <ul>
+            <li><strong>loginusers.vdf</strong> — أسماء المستخدمين، SteamID، حالة "تذكرني" لـ <strong>كل الحسابات</strong> اللي دخلت على الجهاز</li>
+            <li><strong>localconfig.vdf</strong> — إعدادات الحساب، قائمة الأصدقاء، خيارات التشغيل</li>
+          </ul>
+          <p><code>Core.dll</code> يحتوي مكتبة <strong>libcurl</strong> كاملة مع دعم <code>multipart/form-data</code>، <code>CURLOPT_POSTFIELDS</code>، <code>CURLOPT_UPLOAD</code> — عنده القدرة التقنية الكاملة لرفع بياناتك لأي سيرفر.  <span class="inline-tag red">خطر تسريب</span></p>
+        </div>
+      </div>
+
+      <!-- 5. خوادم التحديث -->
+      <div class="expand-card cursor-warn">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon high"><i class="fas fa-globe"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">خوادم التحديث — شبكة خطيرة</div>
+            <div class="ec-sub">3 سيرفرات — 2 منها HTTP غير مشفر</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <table class="mini">
+            <tr><th class="key">السيرفر</th><th>البروتوكول</th><th>الغرض</th></tr>
+            <tr><td><code>update.tnkjmec.com</code></td><td>HTTPS</td><td>خادم أساسي</td></tr>
+            <tr><td><code>update.wudrm.com</code></td><td><span class="inline-tag red">HTTP</span></td><td>خادم احتياطي — IP صيني 43.174.246.23</td></tr>
+            <tr><td><code>update.steamcdn.com</code></td><td><span class="inline-tag red">HTTP</span></td><td>ينتحل steamcdn.com الرسمي</td></tr>
+          </table>
+          <p><code>update.steamcdn.com</code> ينتحل اسم خادم ستيم الرسمي عشان يتجاوز جدران الحماية ويضلل المختصين. <code>update.wudrm.com</code> يستخدم HTTP غير مشفر — أي هاكر على نفس الشبكة يقدر يحقن فيروسات.</p>
+        </div>
+      </div>
+
+      <!-- 6. قاعدة البيانات -->
+      <div class="expand-card cursor-info">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon medium"><i class="fas fa-database"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">قاعدة بيانات القرصنة — appids.db</div>
+            <div class="ec-sub">تذاكر مزورة، مفاتيح فك تشفير، PIN العائلة</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>هيكل قاعدة البيانات:</p>
+          <p><code>CREATE TABLE Appinfo (appid INTEGER PRIMARY KEY, tickets BLOB, type INTEGER, stubdrm INTEGER, DecryptionKey TEXT(64, 64));</code></p>
+          <ul>
+            <li><strong>appid</strong> — معرف اللعبة في ستيم</li>
+            <li><strong>tickets</strong> — تذاكر ملكية مزورة (تذاكر دخول)</li>
+            <li><strong>stubdrm</strong> — نوع DRM اللي يتجاوزه</li>
+            <li><strong>DecryptionKey</strong> — مفتاح AES لفك تشفير محتوى اللعبة</li>
+            <li><strong>Family View PIN</strong> — استخراج رقم PIN الحماية العائلية (<code>"Retrieving Family View PIN for %1..."</code>)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7. IPC -->
+      <div class="expand-card cursor-warn">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon high"><i class="fas fa-plug"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">انتحال IPC — التنكر كهوية ستيم</div>
+            <div class="ec-sub">SteamTools يتظاهر بأنه ستيم الرسمي</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>قنوات IPC (Inter-Process Communication) اللي ينشئها البرنامج:</p>
+          <ul>
+            <li><code>Global_SteamtoolsIPC_Class</code> — قناة SteamTools الداخلية</li>
+            <li><code>Global\Valve_SteamIPC_Class</code> — <strong>ينتحل</strong> قناة Valve الرسمية 🛑</li>
+            <li><code>Global_UnlockedIPC_Class</code> — يرسل إشارة "مفكوك" للألعاب</li>
+          </ul>
+          <p>الألعاب تتواصل مع ستيم عشان تتأكد من الملكية. SteamTools يعترض هذا الاتصال ويرد: "المستخدم يملك كل شي".  <span class="inline-tag red">خداع الألعاب</span></p>
+        </div>
+      </div>
+
+      <!-- 8. Lua -->
+      <div class="expand-card cursor-info">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon medium"><i class="fas fa-puzzle-piece"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">نظام Lua — سطح هجوم قابل للتوسع</div>
+            <div class="ec-sub">سكربتات Lua تتحمّل من السيرفر وتنفّذ</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p>البرنامج يضم محرك Lua كامل:</p>
+          <ul>
+            <li>الملفات: <code>config\stplug-in\Steamtools.lua</code> و <code>luapacka.exe</code></li>
+            <li>يقدر يحمل سكربتات من السيرفر وينفذها</li>
+            <li>السكربتات لها صلاحيات ملفات، شبكة، وريجيستري</li>
+            <li>منطقة قابلة للاستغلال — أي مطور ضار يوزع سكربت Lua يخترق الجهاز</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 9. API -->
+      <div class="expand-card cursor-danger">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon critical"><i class="fas fa-code"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">واجهات Windows API الخطيرة</div>
+            <div class="ec-sub">صلاحيات كاملة للذاكرة، العمليات، والمجلدات</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <table class="mini">
+            <tr><th class="key">API</th><th>الوظيفة</th><th>الخطر</th></tr>
+            <tr><td><code>VirtualProtect</code></td><td>يغير صلاحيات الذاكرة</td><td><span class="inline-tag red">حقن كود</span></td></tr>
+            <tr><td><code>VirtualAlloc</code></td><td>يخصص ذاكرة</td><td><span class="inline-tag red">تنفيذ كود</span></td></tr>
+            <tr><td><code>LoadLibraryA</code></td><td>يحمل DLL</td><td><span class="inline-tag red">تحميل الباب الخلفي</span></td></tr>
+            <tr><td><code>CreateToolhelp32Snapshot</code></td><td>يفحص كل العمليات</td><td><span class="inline-tag orange">تجسس</span></td></tr>
+            <tr><td><code>SuspendThread</code> / <code>ResumeThread</code></td><td>يوقف/يكمل threads</td><td><span class="inline-tag orange">تلاعب بالعمليات</span></td></tr>
+            <tr><td><code>SetThreadContext</code></td><td>يعدل سجلات المعالج</td><td><span class="inline-tag red">حقن كود متقدم</span></td></tr>
+            <tr><td><code>IsDebuggerPresent</code></td><td>يكشف المحللين</td><td><span class="inline-tag gold">تجنب الرقابة</span></td></tr>
+            <tr><td><code>CreateProcessW</code></td><td>يشغل برامج</td><td><span class="inline-tag red">تشغيل فيروسات</span></td></tr>
+          </table>
+          <p>هذي APIs مو طبيعية لأداة "فتح ألعاب" — هذه أدوات <strong>هندسة اجتماعية واختراق</strong>.</p>
+        </div>
+      </div>
+
+      <!-- 10. المراحل -->
+      <div class="expand-card cursor-alert">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon high"><i class="fas fa-sitemap"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">مراحل الهجوم الكاملة</div>
+            <div class="ec-sub">7 مراحل — من التثبيت إلى سرقة البيانات وتشغيل الباب الخلفي</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p><strong>المرحلة 1 — التثبيت:</strong> NSIS installer يفك 18 ملفاً. الشهادة EV تجعل ويندوز وبرامج الحماية تثق به.</p>
+          <p><strong>المرحلة 2 — التشغيل:</strong> <code>SteamTools.exe</code> يشغّل <code>Core.dll</code> — محرك التشفير وlibcurl.</p>
+          <p><strong>المرحلة 3 — كشف ستيم:</strong> يقرأ الريجيستري ويتتبع مسار ستيم.</p>
+          <p><strong>المرحلة 4 — سرقة بيانات:</strong> يقرأ <code>loginusers.vdf</code> و <code>localconfig.vdf</code> (أسماء مستخدمين، SteamID، حالة تذكرني).</p>
+          <p><strong>المرحلة 5 — الباب الخلفي:</strong> يتصل بخوادم التحديث و <code>HttpLoadDLL</code> يجهّز لتحميل أي كود.</p>
+          <p><strong>المرحلة 6 — انتحال IPC:</strong> يتنكر كهوية ستيم ويخدع الألعاب.</p>
+          <p><strong>المرحلة 7 — القرصنة:</strong> يفتح قاعدة البيانات، يولّد تذاكر مزورة، يفك تشفير الألعاب.</p>
+        </div>
+      </div>
+
+      <!-- 11. التشفير -->
+      <div class="expand-card cursor-info">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon medium"><i class="fas fa-key"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">قدرات التشفير</div>
+            <div class="ec-sub">AES-128/192/256، RSA، Windows CryptoAPI</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <p><code>Core.dll</code> يضم مكتبة تشفير كاملة:</p>
+          <ul>
+            <li><strong>AES-128/192/256</strong> — تشفير ملفات التحميل من السيرفر</li>
+            <li><strong>RSA</strong> — توثيق الاتصالات</li>
+            <li><strong>Windows CryptoAPI</strong> — يدير المفاتيح والشهادات</li>
+            <li><strong>libcurl مع SSL/TLS</strong> — يدعم اتصالات آمنة لكنه يستخدم HTTP للخوادم الثانوية</li>
+          </ul>
+          <p>الملفات تصل مشفرة — حتى لو راقبت الشبكة ما تقدر تشوف المحتوى.</p>
+        </div>
+      </div>
+
+      <!-- 12. المجالات -->
+      <div class="expand-card cursor-warn">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon high"><i class="fas fa-globe"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">النطاقات والبنية التحتية</div>
+            <div class="ec-sub">steamtools.net، bbs.steamtools.net، steamtoos.net، steamui.com</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <table class="mini">
+            <tr><th class="key">النطاق</th><th>الاستخدام</th></tr>
+            <tr><td><code>steamtools.net</code></td><td>الموقع الرسمي — خلف Cloudflare</td></tr>
+            <tr><td><code>bbs.steamtools.net</code></td><td>المنتدى</td></tr>
+            <tr><td><code>steamtoos.net</code></td><td>نطاق بديل — حرف L ناقص (typosquatting)</td></tr>
+            <tr><td><code>steamui.com</code></td><td>مصدر واجهات أو تصيد؟</td></tr>
+            <tr><td><code>steamdb.info</code></td><td>موقع ستيم الخارجي — استعلام بيانات الألعاب</td></tr>
+            <tr><td><code>store.steampowered.com</code></td><td>متجر ستيم الرسمي</td></tr>
+          </table>
+          <p>الموقع الرسمي خلف Cloudflare (104.26.5.149, 104.26.4.149) — يخفي عنوان السيرفر الحقيقي.</p>
+        </div>
+      </div>
+
+      <!-- 13. هاشات -->
+      <div class="expand-card cursor-info">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon info"><i class="fas fa-fingerprint"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">بصمات الملفات (SHA-256)</div>
+            <div class="ec-sub">التجزئة المشفرة للتحقق من الملفات</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <ul>
+            <li><strong>المثبّت:</strong> <code style="font-size:0.75rem;">41EC92BC311DAF40B22B2497D044B12D9BA0266DA84D8581255D7CC9E059135F</code></li>
+            <li><strong>SteamTools.exe:</strong> <code style="font-size:0.75rem;">992D547BBF83F26F3117B27AAA2A2E2E665F76658B67C27E84B13DC379833EAA</code></li>
+            <li><strong>Core.dll:</strong> <code style="font-size:0.75rem;">0EFD139F4201AEA356B6BADDB159534BADFEB388BB7DD54EE9D614F166CC64A2</code></li>
+          </ul>
+          <p>تقدر تتأكد بنفسك: قارن الهاش مع الملف اللي عندك.</p>
+        </div>
+      </div>
+
+      <!-- 14. التقييم النهائي -->
+      <div class="expand-card cursor-critical">
+        <div class="expand-card-header" onclick="toggleExpand(this)">
+          <div class="ec-icon critical"><i class="fas fa-clipboard-check"></i></div>
+          <div class="ec-info">
+            <div class="ec-title">التقييم النهائي للمخاطر</div>
+            <div class="ec-sub">مستوى التهديد: عالٍ جداً — باب خلفي، سرقة، قرصنة</div>
+          </div>
+          <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="expand-card-body">
+          <table class="mini">
+            <tr><th class="key">الخطر</th><th>المستوى</th></tr>
+            <tr><td>باب خلفي (HttpLoadDLL)</td><td><span class="inline-tag red">مميت</span></td></tr>
+            <tr><td>سرقة حسابات ستيم</td><td><span class="inline-tag red">مميت</span></td></tr>
+            <tr><td>تحميل فيروسات فدية</td><td><span class="inline-tag red">مميت</span></td></tr>
+            <tr><td>انتحال Valve</td><td><span class="inline-tag orange">عالي</span></td></tr>
+            <tr><td>تحديثات HTTP مكشوفة</td><td><span class="inline-tag orange">عالي</span></td></tr>
+            <tr><td>تعدين العملات</td><td><span class="inline-tag gold">متوسط</span></td></tr>
+            <tr><td>حظر حساب ستيم</td><td><span class="inline-tag gold">متوسط</span></td></tr>
+          </table>
+          <div class="tip-box">
+            <div class="tip-icon"><i class="fas fa-shield-alt"></i></div>
+            <p><strong style="color:#fff;">الخلاصة:</strong> هذا مو مجرد أداة قرصنة — هذي <strong>بوابة خلفية متكاملة</strong> تحت سيطر كاملة لمطوريها. لا تثق فيها لحماية جهازك أو حسابك.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== FAQ ========== -->
+    <div class="sec-header" style="border-bottom-color:rgba(255,179,32,0.08);">
+      <h2>أسئلة العقول المتحجرة</h2>
+      <span class="count">الأعذار الأكثر غباءً</span>
+    </div>
+    <p style="color:rgba(255,255,255,0.25);font-size:0.8rem;margin:-12px 0 22px;">بعض الناس يصرّون على تدمير أجهزتهم بأنفسهم — هذي أعذارهم المفضلة:</p>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-shield-halved"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"برامج الحماية ما كشفتها، يعني آمنة"</div>
+          <div class="ec-sub">أغبى عذر ممكن تسمعه — وإليك почему</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>برامج الحماية (Antivirus) <strong>ليست ذكية بالقدر اللي تتصوره</strong>. أدوات الكراك والهاك تصمَّم خصيصاً عشان تتفادى برامج الحماية. إذا كان برنامج مكتوب عشان يخترق ألعاب، أكيد كاتبه يعرف كيف يتجنب Windows Defender.</p>
+        <p>بعدين، الباب الخلفي <code>HttpLoadDLL</code> <strong>ينزّل ملفات مشفرة</strong> — برنامج الحماية ما يقدر يفحص ملف مشفر لأنه ببساطة ما يعرف وش داخله لين يفك تشفيره. وفي هذي اللحظة يكون الأوان فات.</p>
+        <p><strong style="color:#ff5555;">وبرضه:</strong> الـ EXE الرئيسي مو موقّع 👈 شلون برنامج الحماية يثق فيه؟ الثقة من الشهادة الرقمية مو من الكود.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-clock"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا استخدمها من سنة وما صار لي شي"</div>
+          <div class="ec-sub">مبروك — أنت في مرحلة الطعم الحي</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>هذا أكثر عذر سمعناه. طيب، فكر:<br><br>
+        • الـ HttpLoadDLL موجود من أول يوم، شغال وجاهز<br>
+        • السيرفر الصيني اللي يتحكم فيه المطور شغال<br>
+        • كل اللي يحتاجه المطور: <strong>يضغط زر</strong> عشان يحول كل الأجهزة اللي منصّب عليها البرنامج إلى <strong>شبكة بوت نت (Botnet)</strong> أو يرسل لها فدية<br><br>
+        انتظرت للسنة هذي؟ استنى للسنتين الجاية. السرقة مو لازم تجي اليوم — تجي <strong>لين يقرر المطور</strong> إنه حان وقت الحصاد.</p>
+        <div class="tip-box" style="border-color:rgba(255,50,50,0.1);">
+          <div class="tip-icon" style="color:#ff5555;"><i class="fas fa-skull"></i></div>
+          <p style="margin:0 !important;">"ما صار لي شي" مو دليل أمان — هو دليل إنك <strong>لسه ما صرت الهدف</strong>. الباب الخلفي مو شرط يشتغل اليوم. المشكلة إنه <strong>يقدر يشتغل أي يوم</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-users"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"ملايين الناس يستخدمونها، مو معقول كلهم غلطانين"</div>
+          <div class="ec-sub">ملايين الناس كانوا يدخنون وهم يعرفون إنه سرطان</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>العدد ما يحدد الصح من الغلط. الملايين يستخدمون <strong>فيسبوك</strong> وبرغم ذلك فيسبوك يبيع بياناتك. الملايين ركبوا <strong>تطبيقات خبيثة</strong> من Google Play قبل ما تنكشف.</p>
+        <p>الإقبال الجماعي <strong>ليس دليلاً على الأمان</strong>. المطور يبني ثقة عبر الأعداد، وبعدين <strong>يستغلها</strong>. كل الضحايا اللي فقدوا حساباتهم كانوا يقولون "مو معقول كلهم غلطانين" قبل ما يفيقون على حسابات مسروقة.</p>
+        <div class="tip-box" style="border-color:rgba(255,179,32,0.1);">
+          <div class="tip-icon" style="color:#ffb320;"><i class="fas fa-brain"></i></div>
+          <p style="margin:0 !important;">التفكير الجماعي ما يصنع أمان — يصنع <strong>قطيعاً</strong>. هل تفضل تكون في القطيع وتنتظر دورك، أو تكون واعي ومحمي؟</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-file"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"هي مجرد أداة فتح ألعاب — مو فيروس!"</div>
+          <div class="ec-sub">السيارة المفخخة ما تطلع من المصنع وهي مفخخة</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>طيب، إذا كانت مجرد أداة فتح ألعاب، <strong>ليه تحتوي على HttpLoadDLL؟</strong> ليه تقرأ <code>loginusers.vdf</code>؟ ليه تتنكر كهوية Valve؟ ليه تحتوي على محرك Lua؟ ليه تستخدم APIs حقن كود؟</p>
+        <p>شوف — الملفات الخبيثة الحقيقية ما تبدأ كفيروسات. تبدأ <strong>كأدوات مفيدة</strong> تكسب ثقتك، وبعدين تستغل هالثقة. هذي الاستراتيجية اسمها <strong>"Trojan"</strong> — حصان طروادة. والاسم مو من فراغ.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-user-tie"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"المبرمج قال أنها آمنة"</div>
+          <div class="ec-sub">طبعاً راح يقول لك آمنة — على الأقل لين تنتهي فترة جمع البيانات</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>مطور الأداة يقول إنها آمنة؟ وانت <strong>صدّقته</strong>؟ في عالم الأمن السيبراني، <strong>لا تثق أبداً في المطور — ثق في الكود</strong>. الكود لا يكذب. الكود يا يكون فيه باب خلفي يا لا. وكل الأدوات اللي حللناها — SteamTools, Project-Lightning, Lua Tool, Online-Fix — فيها أثبات <strong>ملموسة</strong> على وجود أختراق.</p>
+        <p>لما شخص يقول "برنامجي آمن" وتسأله عن الكود وما يجاوب، أو يقول "هذا كود مفتوح" ويعطيك ملفات ومبنيّة ومشفّرة — <strong>هذا احتيال</strong>.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-trash"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"إذا صار شي، أعمل فورمات — خلاص"</div>
+          <div class="ec-sub">شجاعة الجهل — تنسى إن الحساب ما يتفورمات</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>تمام، الفورمات يرجع جهازك نظيف — <strong>ماذا عن حساب ستيم؟</strong> إذا الفايروس سرق حسابك وغيّر الإيميل والباسورد، الفورمات ما يرجع لك الحساب. <strong>ستيم ما عنده "فورمات"</strong>. الحساب يروح للأبد مع كل الألعاب اللي اشتريتها.</p>
+        <p>وبعدين: الفورمات ما يضمن إن الملفات الخبيثة ما نسخت نفسها في أقسام مخفية أو في الـ BIOS. الفورمات السطحي (Quick Format) <strong>ما يمسح كل شي</strong>. والفورمات العميق يمسح كل بياناتك الشخصية — صور، ملفات، مشاريع.</p>
+        <p>هل فعلاً مستعد تخسر كل هالشي عشان لعبة وحدة؟</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-coins"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"ما عندي فلوس أشتري الألعاب — مضطر"</div>
+          <div class="ec-sub">الاضطرار ما يبرر المخاطرة</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>فهمتك — الألعاب غالية. لكن:<br><br>
+        • إذا البرنامج المجاني سرق حسابك: <strong>تخسر كل الألعاب اللي عندك</strong><br>
+        • إذا زرع فيروس فدية: <strong>تخسر كل ملفاتك</strong> وتدفع فدية<br>
+        • إذا زرع متصيد عملات: <strong>جهازك يشتغل 24 ساعة</strong> بدون ما تدري وفاتورة الكهرباء تزيد<br><br>
+        الحل مو في أداة مجانية تخترق جهازك — الحل في HANZO2TEAM. مرة واحدة تدفع <strong>10,000 دينار</strong> مدى الحياة، ضد <strong>خسارة آلاف الدولارات</strong> من المكتبة والأجهزة. احسبها صح.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-sheep"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"غيري يستخدمها وما فيهم شي — أنا زيهم"</div>
+          <div class="ec-sub">قطيع يقود قطيعاً إلى الهاوية</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>ترى "غيري يشتغل بها" ما كانت أبداً حجة منطقية. يعني لو غيرك نط من جسر، بتقفز وراه؟</p>
+        <p>هذه الأدوات تشبه <strong>الروليت الروسي</strong>: بعض الناس يطلقون ويطلعون أحياء، بس هالشي ما يخلي اللعبة آمنة. كل يوم شخص يفيق على حساب مسروق ويسأل "ليش أنا؟!" — الجواب: لأنك <strong>خاطرت</strong>.</p>
+        <p>في النهاية، القرار قرارك. الجهاز جهازك، والحساب حسابك. احنا فقط <strong>حذرناك</strong>.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-download"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"حملته ومسحته بعدين — خلاص اختفى"</div>
+          <div class="ec-sub">لا يا ذكي، ما اختفى</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>الملفات الخبيثة ما تمسح نفسها بنفسها. كثير من أدوات الكراك تزرع <strong>Bootkit</strong> أو <strong>Rootkit</strong> في أقسام مخفية من القرص الصلب. حتى لو سويت Uninstall، يبقى الأثر.</p>
+        <p>بعضها يحقن نفسه في <strong>Windows System Restore</strong> أو في الـ Registry. تحذف البرنامج وتعتقد انتهى — لا، هو ساكن عندك ومستعد يشتغل أي وقت.</p>
+        <p><strong style="color:#ff5555;">وفوق هذا:</strong> HttpLoadDLL ما يحتاج يكون الموجود على جهازك عشان يشتغل. يكبر ملف صغير يشتغل في الخلفية، وبعد ما ينزّل الحمولة من السيرفر، يمسح نفسه. <strong>ترضى بهالعقلية؟</strong></p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-eye-slash"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا ما عندي شي يسرقونه — حسابي فاضي"</div>
+          <div class="ec-sub">الغبي يعتقد إن الفيروسات تطارد الحسابات الفاضية فقط</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>المُخترِق ما يسرق حسابك عشان ألعابك — <strong>يستخدمه عشان ينصب على غيرك</strong>. حسابك (حتى لو فاضي) يصير أداة:<br><br>
+        • يرسل روابط تصيد (Phishing) لأصدقائك<br>
+        • يوزع ملفات خبيثة في مجموعات ستيم<br>
+        • ينشر أخبار كاذبة أو ترويج لمنتجات غير قانونية<br>
+        • يستخدمه كـ "حساب وهمي" للتهرب من الرقابة<br><br>
+        سمعت عن <a href="https://store.steampowered.com" target="_blank" style="color:#ffb320;">**Steam Community Ban**</a>؟ حسابك (الفاضي) لو استُخدم في إرسال سبام، يتقفل نهائياً مع كل الألعاب المستقبلية اللي ممكن تشتريها. <strong>حساب فاضي اليوم = حساب مسروق بكره = سمعة مدمرة للأبد.</strong></p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-code"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"الكود مفتوح المصدر — أقدر أتأكد بنفسي"</div>
+          <div class="ec-sub">بالتأكيد — خلنا نشوفك تفك 600 ألف سطر كود</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>مصطلح "مفتوح المصدر" يضلّل ناس كثير. <strong>كود مفتوح</strong> معناه إن الكود المصدري منشور. لكن هل فعلاً فحصته؟ هل تقدر تقرأ <strong>C++</strong> وتفهم مكتبات <strong>libcurl</strong> و <strong>Windows API</strong>؟</p>
+        <p>حتى لو الكود منشور، الملفات اللي تتحمّل من السيرفر <strong>مو مفتوحة</strong>. الملفات المشفرة اللي تنزل عبر HttpLoadDLL ما تشوف كودها أبداً. <strong>مفتوح المصدر يخبّي باب خلفي مشفر؟</strong> إذا الكود مفتوح فعلاً، ليش التشفير؟ ليش التحميل عن بُعد؟</p>
+        <p><strong style="color:#ffb320;">الخلاصة:</strong> "مفتوح المصدر" في يد غبي = نافذة جميلة على سجن رقمي.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-child"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا مبرمج وأعرف وش أسوي — أعرف أحمي نفسي"</div>
+          <div class="ec-sub">أكبر المبرمجين يقعون في فخاخ التصيد — وأنت وش دخلك؟</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>سمعت عن <strong>SolarWinds Hack</strong>؟ شركة برمجيات كاملة اخترقت لأن موظف استخدم كود من مصدر غير موثوق. سمعت عن <strong>GitHub Supply Chain Attacks</strong>؟ مبرمجين محترفين يصدّرون مكتبات فيها أبواب خلفية بدون ما يدري أحد.</p>
+        <p>أنت كـ "مبرمج" — هل حللت الـ Core.dll بنفسك؟ هل فككت تشفير HttpLoadDLL؟ هل تتبعت كل دالة في Lua Engine؟ <strong>لا</strong>. أنت فقط <strong>تظن</strong> إنك محمي لأنك تعرف تسوي Hello World بلغة JavaScript. الأمن السيبراني علم قائم بذاته، مو حشو كبني.</p>
+        <p><strong style="color:#ff5555;">الخبر السيئ:</strong> الثقة الزائدة هي أكبر نقطة ضعف. الهاكرز يعتمدون عليها.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-box-open"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أشغّله في Sandbox / VM — ما يضرني"</div>
+          <div class="ec-sub">الـ Sandbox ما يحمي حساب ستيم اللي خارج الصندوق</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>لنفترض إنك شغّلت الأداة في Sandbox وعزلتها عن جهازك. <strong>ممتاز</strong>. بس ستيم اللي شغال على جهازك الأصلي؟ حسابك الحقيقي؟ Sandbox <strong>ما يعزله</strong>. البرنامج يقرأ loginusers.vdf حق ستيم الحقيقي من الـ Registry.</p>
+        <p>ولو الأداة محتاجة تتصل بستيم (وهي أداة ألعاب)، فـ Sandbox يكون موصل بالشبكة — وأي باب خلفي داخل Sandbox <strong>يقدر يرسل بياناتك للسيرفر</strong>. Sandbox مو درع سحري. الفكرة الأساسية: <strong>إذا شغّلت أداة خبيثة، Sandbox يقلل الضرر لكن ما يمنعه تماماً</strong>.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-tools"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا أستخدم VPN — يخفي هويتي"</div>
+          <div class="ec-sub">إخفاء الهوية من ستيم ما يمنع الفيروس من سرقة حسابك</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p><strong>وجهك مسكر، بس باب البيت مفتوح</strong>. الـ VPN يخفي عنوان IP حقك — ممتاز. لكنه <strong>ما يمنع</strong> HttpLoadDLL من تنزيل ملف خبيث. <strong>ما يمنع</strong> قراءة loginusers.vdf. <strong>ما يمنع</strong> الباب الخلفي من فتح اتصال بالسيرفر الصيني.</p>
+        <p>الـ VPN مثل وضع نظارة سوداء — أحد ما يشوف عيونك، لكن سيارتك تمشي في اتجاه الجدار و<strong>الاصطدام راح يصير</strong>. هل الـ VPN راح يمنع الاصطدام؟ <strong>لا.</strong></p>
+        <p><strong style="color:#ffb320;">النقطة:</strong> التركيز على VPN ونسيان HttpLoadDLL مثل تنظيف مقبض الباب والنار مشتعلة في المطبخ.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-smile-wink"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أكثر واحد يتكلم عن الأمان هو صاحب HANZO2TEAM — أكيد يبي يبيع"</div>
+          <div class="ec-sub">أيوه، أكيد — وكل الأطباء اللي يحذرون من التدخين عندهم مصلحة في بيع الدواء</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>حجة كلاسيكية: "أنت تبي تبيعني شي، فما أثق في كلامك." — <strong>طيب، وش دخل تحليل GitHub المستقل؟</strong> رابط التحليل في أسفل الصفحة — <strong>مستقل، مو تابع لنا، ولا له علاقة ببيع أي منتج</strong>. روح اقرأه بنفسك. كل ملفات SteamTools منشورة هناك مع هاشات SHA-256 تقدر تتأكد منها.</p>
+        <p>ثانياً: نحن <strong>لا نكسب شيئاً من تحذيرك</strong> من SteamTools و Online-Fix ومنتجاتها. لو تروح لأداة مجانية وتتضرر، ما نستفيد. نحن فقط نشرنا تحليلاً أمنياً — اللي عنده عقل يستفيد، واللي عنده عناد مستحكم يروح يخرب جهازه ويجي يندب.</p>
+        <p><strong style="color:#ff5555;">النهاية:</strong> مو كل واحد يحذرك "يبي يبيعك" — أحياناً يحذرك عشان <strong>شفقة</strong>. والشفقة هذي مرة وحدة — الباقي على مسؤوليتك.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-hospital"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"يا عمي الحياة مخاطر — إذا خفت ما لعبت"</div>
+          <div class="ec-sub">الموت في لعبة Battle Royale يختلف عن موت حسابك الحقيقي</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>ها، حجة "الرجال" — تتصوّر إن تحميل أداة مجانية يخليك جريء؟ <strong>الغباء ليس شجاعة</strong>. الفرق بينك وبين شخص يلعب روليت روسي: لعبة الروليت تلعبها مرة. هالأداة تلعبها <strong>كل يوم</strong>. كل ما تشغّلها، تدور لك على رصاصة.</p>
+        <p>الحياة فيها مخاطر، صح. لكن المخاطر العقلانية تختلف عن المخاطر الغبية. <strong>الفرق:</strong> ركوب السيارة فيه خطر — لكنه خطر محسوب. تحميل أداة فيها باب خلفي صيني؟ هذا مو خطر — هذا <strong>انتحار مبرمج</strong>. لا تخلط بين الشجاعة والحماقة — الفرق واضح لكل من عنده ذرة عقل.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-flask"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"هذا الكلام كله نظريات مؤامرة — أنت جبان"</div>
+          <div class="ec-sub">نظريات مؤامرة؟ إذن روح حلّل الكود بنفسك</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>كل شي قلناه في هالصفحة <strong>موجود في الكود</strong>. مبني على <strong>تحليل ثابت (Static Analysis)</strong> لكل ملفات SteamTools. الـ HttpLoadDLL حقيقة تقنية — مو "نظرية". ملفات الـ DLL المشفرة حقيقة. خوادم HTTP المكشوفة حقيقة. سرقة loginusers.vdf حقيقة.</p>
+        <p>أنت تسميها نظرية مؤامرة لأنك <strong>تخاف تواجه الحقيقة</strong>. لأنك عارف إنك استخدمت الأداة وحاسّ إنك غلطان. بدل ما تعترف، تطلق تهم "نظريات مؤامرة" عشان تحسّن صورتك قدام نفسك. <strong>هذا إنكار نفسي، مو تفكير نقدي</strong>.</p>
+        <p>الحقيقة: الرابط تحت في GitHub — روح اقرأ. ولا تبقى جبان وتتهرب.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-toilet"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"طيب أنا نزلتها من موقع موثوق — مو مثل موقعك"</div>
+          <div class="ec-sub">المواقع "الموثوقة" عند الجهال = مواقع قرصنة</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>ها، "موقع موثوق" — شكله بايدك. طيب، عرّف "موثوق":<br><br>
+        • موقع رسمي لشركة معروفة؟ <strong>لا</strong><br>
+        • موقع عليه حماية SSL فقط؟ <strong>أي موقع مسروق عنده SSL</strong><br>
+        • موقع عليه تعليقات إيجابية؟ <strong>التعليقات مزيفة بدرهم</strong><br>
+        • موقع منتشر في قروبات التليجرام؟ <strong>نفس قروبات الاختراق</strong><br><br>
+        أنت تزور موقع قرصنة وتسميه "موثوق"؟ <strong>هذا مثل ما تقول "الموثق عندي هو دكتور وهمي لأنه مبتسم".</strong> الثقة الحقيقية تأتي من الكود نفسه — وكود SteamTools و Online-Fix <strong>مليان بابات خلفية</strong>. نزّل التحليل من GitHub إذا كنت صادق.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-chart-simple"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"هذا الكلام عن Version قديمة — الإصدار الجديد آمن"</div>
+          <div class="ec-sub">الباب الخلفي مو علة — هو ميزة. الميزات ما تتغير بالتحديثات</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>هالحجة تفترض إن HttpLoadDLL كان <strong>غلطة</strong> وانحلت بالتحديث. غلطان. HttpLoadDLL مش "خلل برمجي" — هو <strong>ميزة أساسية</strong> في Core.dll. مو شي يستخدموه بالغلط. هذي دالة مكتوبة عمداً عشان تحمّل أي كود من السيرفر. إزالتها تعني إعادة كتابة نصف المحرك.</p>
+        <p>الإصدار الجديد <strong>أضاف ميزات أكثر</strong> — مو إزالة الباب الخلفي. كل إصدار يزيد من قدرات Lua، يزيد من قاعدة البيانات، يزيد من APIs الاختراق. <strong>إذا كان الإصدار القديم فيه باب خلفي، الإصدار الجديد فيه باب خلفي + ستارة + سجادة حمراء.</strong> التحديثات ما تحمي المجرم — التحديثات تجعل الجريمة أكثر احترافية.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-baby"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا صغير — ما عندي حساب مهم عشان يسرقوه"</div>
+          <div class="ec-sub">مبرمجو البرمجيات الخبيثة يعشقون الأطفال بالذات</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>صغر سنك <strong>ليس درعاً</strong> — هو <strong>هدف</strong>. الهاكرز يستهدفون الصغار لأنهم:<br><br>
+        • <strong>أسهل خداعاً</strong> — ما عندك خبرة تفرق بين الخطر والأمان<br>
+        • <strong>حسابات أنظف</strong> — حسابات صغيرة العمر ما عليها رادار ستيم<br>
+        • <strong>أقل وعياً</strong> — ما تعرف تكتشف الاختراق إلا بعد فوات الأوان<br>
+        • <strong>جهاز العائلة</strong> — فيروس على جهازك يعني فيروس على جهاز أمك وأبوك<br><br>
+        أنت الآن تبني مستقبلك الرقمي. حساب ستيم اللي تسويه اليوم راح يكون <strong>مكتبة ألعاب بآلاف الدولارات</strong> بعد 10 سنين. تبي تخسر كل هذا عشان لعبة مجانية اليوم؟ <strong>طفولتك مو عذر — مسؤوليتك.</strong></p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-broom"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا مسحت البرنامج ومسحت ملفاته — أنا نظيف"</div>
+          <div class="ec-sub">الملفات الخبيثة تشبه الصراصير — تشوف واحدة قتلت، وعشرات مختفين</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>طيب، إذا مسحت البرنامج، لسائل: كيف عرفت إنك مسحت <strong>كل</strong> الملفات؟ البرنامج ينشر ملفات في:<br><br>
+        • <strong>Temp folders</strong> — مؤقت وينظف نفسه<br>
+        • <strong>AppData\Local, AppData\Roaming</strong> — ملفات مخفية<br>
+        • <strong>Windows Registry</strong> — مفاتيح خبيثة تبقى<br>
+        • <strong>System32\drivers</strong> — إذا زرع Bootkit<br>
+        • <strong>WMI Repository</strong> — نادراً ما يمسحه أحد<br><br>
+        المسح اليدوي (Delete + Recycle Bin) ما ينفع. حتى Revo Uninstaller ما يضمن. الـ HttpLoadDLL أصلاً ما يكون ملف ثابت — ينزل من السيرفر، يشتغل، ويمسح نفسه. <strong>استخدمت البرنامج لمدة ثانية واحدة؟ الباب الخلفي فتح اتصال للسيرفر — وهذا يكفي</strong>. النظافة مو بالمسح — النظافة إنك ما تحمل أبداً.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-skull"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أعرف شخص يستخدمها من 3 سنين — ولا صار له شي"</div>
+          <div class="ec-sub">أعرف شخص دخن 50 سنة — ومات في عمر 90. هل يعني التدخين آمن؟</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>هذه تسمّى <strong>مغالطة " anecdotes ليست بيانات " (Anecdotal Fallacy)</strong>. حالة فردية لا تنفي الإحصاء. فيه ناس كسبوا في اليانصيب — هل معنى هذا إن شراء تذاكر اليانصيب استثمار ذكي؟ <strong>لا.</strong></p>
+        <p>الشخص اللي تعرفه ما صار له شي <strong>إلى الآن</strong>. الـ HttpLoadDLL <strong>ينتظر</strong>. مثل القنبلة الموقوتة — مؤقتها ما تعرفه. بعض الناس يعيشون مع الباب الخلفي سنين بدون مشكلة، لين المطور يقرر يستخدمه. شخص واحد تعرفه ما صار له شي ≠ 1000 شخص ما صار لهم شي. <strong>أنت تلعب إحصاء — والإحصاء ضدك.</strong></p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-handcuffs"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"كل الأدوات تسوي كذا — هذي طبيعة البرنامج"</div>
+          <div class="ec-sub">إذا كل اللصوص يسرقون، هل هذا يخلي السرقة حقاً مشروعاً؟</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>نعم، كثير من أدوات القرصنة تسوي كذا. هل هذا يجعلها <strong>صحيحة</strong>؟ لا. كثرة الجريمة لا تشرعها.<br><br>
+        • "كل الأدوات" فيها HttpLoadDLL؟ <strong>مو كل — HANZO2TEAM ما فيه</strong><br>
+        • "كل الأدوات" تسرق loginusers.vdf؟ <strong>مو كل — HANZO2TEAM لا يقرأها</strong><br>
+        • "كل الأدوات" تنتحل Valve؟ <strong>مو كل — HANZO2TEAM لا ينتحل أحد</strong><br>
+        • "كل الأدوات" تحتوي Dropper؟ <strong>مو كل — HANZO2TEAM نقي</strong><br><br>
+        حجة "الكل يسوي كذا" حجة طفل في الروضة — "بس ماما، زمبلي سرق لعبتي!" ما دام فيه خيار آمن (HANZO2TEAM)، فاستخدام الأداة الخطيرة <strong>اختيار واعي للمخاطرة</strong>. مو اضطرار.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-dragon"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنت أصلاً مسوي كراك — ترى برنامجك كراك برضو"</div>
+          <div class="ec-sub">لا، مو كراك. كراك = يحقن ملفات في ذاكرة اللعبة. أنا = أعترض اتصال ستيم. الفرق زي السما والأرض</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>هذي الحجة تظهر إنك <strong>ما فهمت الفرق التقني</strong>. خلّي أوضح:<br><br>
+        <strong>الكراك (Crack):</strong> يحقن Code في ذاكرة اللعبة يعدّل مسار تنفيذها — هذا يخلي برنامج الحماية يصرخ "HackTool!" ويخالف شروط ستيم.<br><br>
+        <strong>اعتراض اتصال ستيم:</strong> برنامجي يجلس <strong>بين</strong> ستيم واللعبة — ما يدخل ذاكرة اللعبة، ما يعدّل ملفاتها، ما يلمس كودها. يوجّه طلبات الشبكة فقط.<br><br>
+        زي الفرق بين شخص يدخل بيتك ويقلّب أثاثك (كراك) — وشخص يوقف عند الباب ويكلّم اللي داخل (اعتراض اتصال). <strong>ما سوينا كراك — سوينا توجيه شبكة ذكي.</strong> إذا بتقول لي برضو "كراك"، معنى هذا إنك مصمم تبرر غلطك وتصنّع أعذار. عذر أقبح من ذنب.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-face-lying"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"طيب هات دليل واحد أن أداة مجانية سرقت حساب شخص"</div>
+          <div class="ec-sub">الدليل موجود — بس حتى لو جبته، راح تقول "هذا كذب"</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>طبعاً في أدلة — مئات المنشورات في Reddit, Steam Community, فيسبوك. ناس فقدوا حساباتهم. بس أنا أعرف إنه حتى لو جبت 1000 دليل، راح تلقّهم وتقول:<br><br>
+        • "يمكن الباسورد ضعيف"<br>
+        • "يمكن نزل شي ثاني"<br>
+        • "يمكن كذابين"<br>
+        • "يمكن اخترقوا من موقع تاني"<br>
+        • "يمكن، يمكن، يمكن..."<br><br>
+        <strong>هذا مو طلب دليل — هذا إنكار مرضي.</strong> أنت ما تبي دليل. أنت تبي <strong>مبرر</strong> عشان تستمر في استخدام الأداة بدون شعور بالذنب. ما عندي دليل واحد — عندي <strong>تحليل كامل لـ 18 ملف</strong>، 26 قسم تقني، كود كامل منشور على GitHub. إذا هذا ما يكفي، ولا 1000 دليل راح يكفيك. استمر في إنكارك — بس لا تجي تنزل تعليق "انسرق حسابي 😭" بعد أسبوع.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-biohazard"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"إذا أنا ما عندي حساب أصلاً — جربت البرنامج عشان أشوف شكله"</div>
+          <div class="ec-sub">جربت السم عشان تشوف طعمه — وما يهمك إنه سم</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>هذا أغبى عذر قرته في حياتي — "ما عندي حساب بس حمّلت البرنامج". <strong>إذا ما عندك حساب، ليش أصلاً نازل برنامج كسر حماية ستيم؟</strong> وش حكاية العقل هذي؟<br><br>
+        حتى لو ما عندك حساب:<br><br>
+        • البرنامج يجمع بيانات جهازك — IP، MAC، OS، مكونات<br>
+        • يقرأ ملفات من جهازك — أي ملف يلقاه<br>
+        • يفتح باب خلفي لجهازك — لأي هاكر<br>
+        • يستخدم جهازك كجزء من شبكة بوت نت — يهكر غيرك من خلالك<br><br>
+        <strong>حتى لو ما عندك ستيم، عندك جهاز — والجهاز يسوى.</strong> إذا ما عندك حساب، أنت أسوأ ضحية: <strong>تضررت بدون ما تستفيد ولا مرة</strong>. أنت المثل الحي لـ "خسران خسران".</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-arrow-progress"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"كل هالأدوات تبع بعض — أنت تحارب طواحين الهواء"</div>
+          <div class="ec-sub">هذا مو دون كيخوت — هذا تشريح لجثة رقمية</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>SteamTools, Project-Lightning, Lua Tool, Online-Fix — كلها تبع بعض؟ <strong>بالضبط.</strong> وكلها فيها بابات خلفية. كلها تسرق بيانات. وكلها خطيرة. هذي مشكلة مو حل.</p>
+        <p>أنت تقول "كلها نفس الشي فما فيها مشكلة" — وأنا أقول "كلها نفس الخطورة فما فيها حل آمن غير HANZO2TEAM". <strong>نفس الوقعة — زاوية نظر مختلفة</strong>. أنت تستخدم هالحجة عشان تبرر استمرارك في استخدامها. أنا استخدمها عشان أقول لك: <strong>كلها مخاطر، فاختر أفضلها — أو اشتري الألعاب.</strong></p>
+        <p>وياكد — لو SteamTools, Online-Fix و Project-Lightning "تبع بعض"، فهذا دليل على أن السوق مسموم بالكامل. والأداة الوحيدة اللي خارج السوق المسموم هي <strong>HANZO2TEAM</strong>. شو رأيك؟</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon high"><i class="fas fa-circle-nodes"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"ترى أنا مهندس شبكات وأعرف — هذا الكلام كله مضحك"</div>
+          <div class="ec-sub">مهندس شبكات = خبير أمن سيبراني؟ من متى؟</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>مهندس شبكات يعرف الـ OSI Model، Routing، Switching — وهذا مجال مختلف تماماً عن <strong>تحليل البرمجيات الخبيثة (Malware Analysis)</strong>. الفرق بينك وبين محلل أمني مثل الفرق بين سائق شاحنة وميكانيكي سيارات. الإثنين يعرفون الطريق — لكن واحد بس يعرف وش تحت الكبوت.</p>
+        <p>هل تدري كيف يعمل <strong>Process Hollowing</strong>؟ هل تعرف <strong>DLL Side-Loading</strong>؟ هل فككت <strong>Packed Executable</strong>؟ هل حللت <strong>Lua Bytecode</strong>؟ إذا لا، فشهادتك في الشبكات لا تعطيك الحق تستخف بتحليل أمني كامل. <strong>التواضع في العلم يعلّمك — الغرور يعلّمك الدرس.</strong> ومتى ما اخترق جهازك، راح تتصل بمهندس شبكات زيك — وكلاهكم ما راح يعرف الحل. محترم.</p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-ghost"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"طيب إذا هي خطيرة، ليه ستيم نفسها ما سوت شي؟"</div>
+          <div class="ec-sub">ستيم مشغولة تحمي حسابات 120 مليون مستخدم — مو قاعدة تطارد كل أداة</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>ستيم <strong>تعرف</strong> بهالأدوات. تسوي حظر جماعي (Mass Ban Waves) كل فترة. آلاف الحسابات تتقفل كل شهر. بس ما تقدر تسوي شي أكثر — لأن:<br><br>
+        • SteamTools و Online-Fix توزّع من سيرفرات خارجية — ما لستيم سيطرة عليها<br>
+        • المبرمجين يستخدمون شبكات توزيع مختلفة (Telegram، مواقع صينية)<br>
+        • ما تقدر تغير آلية عمل ستيم كلها عشان توقف أداة معينة<br><br>
+        ستيم تسوي اللي تقدر عليه — <strong>بس مات وقتهاش كل باب خلفي عشان عيونك</strong>. الحماية مسؤوليتك أنت أولاً. ستيم مش أمك — ولو هي أمك، وحدة من مليون أم ما تقدر تحمي ابنها من كل غباء. <strong>الحماية تبدأ من العقل.</strong></p>
+      </div>
+    </div>
+
+    <div class="expand-card">
+      <div class="expand-card-header" onclick="toggleExpand(this)">
+        <div class="ec-icon critical"><i class="fas fa-gear-complex-code"></i></div>
+        <div class="ec-info">
+          <div class="ec-title">"أنا بجمع اللينكات وأبعتها لصاحب الموقع — يرقع الثغرات"</div>
+          <div class="ec-sub">تبي تخبر المجرم إنك عرفت خطته — عشان يعدلها؟ عبقرية</div>
+        </div>
+        <span class="ec-toggle"><i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="expand-card-body">
+        <p>نعم، أرسل لصاحب الموقع تفاصيل الثغرات الأمنية — <strong>عشان يسدها ويصعّب اكتشافها على غيره</strong>. الباب الخلفي مو ثغرة — هو <strong>ميزة متعمدة</strong>. إرسال التحليل للمطور ما يصلح البرنامج — يجعله <strong>أكثر تطوراً وأصعب اكتشافاً</strong>.</p>
+        <p>في عالم الأمن السيبراني، هالشي اسمه <strong>Responsible Disclosure</strong> للشركات. الشركة اللي تسوي برنامج وتترك ثغرة سهواً — ترقعها. المطور اللي يبني باب خلفي عمداً — <strong>يقفل النافذة اللي اكتشفتها ويفتح نافذة ثانية</strong>. الفرق؟ <strong>النية.</strong> والنية هنا خبيثة. إرسالك التحليل للصاحب مثل إعطاء لص مخطط البنك: "هنا كاميراتك ضعيفة، ركّب أحسن عشان محد يمسكك." <strong>فعلاً عبقري.</strong></p>
+      </div>
+    </div>
+
+    <!-- ========== COMPARISON TABLE ========== -->
+    <div class="compare-wrap">
+      <h2>مقارنة شاملة</h2>
+      <p class="sub">الفرق بين الأمان والمخاطرة</p>
+
+      <div style="text-align:center;margin-bottom:20px;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:12px;border:1px solid rgba(255,255,255,0.04);">
+        <p style="color:rgba(255,255,255,0.55);font-size:0.92rem;line-height:1.8;margin:0;">
+          <strong style="color:#fff;">ملاحظة:</strong> كلا الملفين يستخدمان <strong style="color:#ffb320;">نفس التقنيات</strong> التي تتيح للاعبين اللعب أونلاين على <strong style="color:#ffb320;">سيرفرات Spacewar</strong> — لكن:<br>
+          <span style="color:#4caf50;">✓ HANZO2TEAM</span> يوفّر الميزة بدون أي إضافات خبيثة — <strong>نظيف بالكامل</strong>.<br>
+          <span style="color:#ff5555;">✗ Online-Fix.me</span> يضيف <strong>إضافات خبيثة</strong> (Dropper, Malicious, Grayware) فوق نفس الخاصية.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;justify-content:center;">
+        <img src="HANZO2TEAM.jpg" alt="VirusTotal HANZO2TEAM - نظيف" style="max-width:45%;border-radius:12px;border:1px solid rgba(76,175,80,0.2);">
+        <img src="onlinefixme.jpg" alt="VirusTotal Online-Fix.me - مكتشف" style="max-width:45%;border-radius:12px;border:1px solid rgba(255,50,50,0.2);">
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr><th>العنصر</th><th>HANZO2TEAM</th><th>SteamTools, Online-Fix وغيرها</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>طريقة العمل</td><td><span class="tag-safe">اعتراض اتصال ستيم</span></td><td><span class="tag-danger">حقن ملفات في ذاكرة الألعاب</span></td></tr>
+          <tr><td>فحص VirusTotal</td><td><span class="tag-safe">0/70 — نظيف بالكامل</span></td><td><span class="tag-danger">20/70 — Malicious + Dropper</span></td></tr>
+          <tr><td>باب خلفي</td><td><span class="tag-safe">✗ غير موجود</span></td><td><span class="tag-danger">HttpLoadDLL</span></td></tr>
+          <tr><td>تسريب بيانات</td><td><span class="tag-safe">✗ آمنة</span></td><td><span class="tag-danger">تقرأ loginusers.vdf</span></td></tr>
+          <tr><td>تحديثات</td><td><span class="tag-safe">مشفرة SSL</span></td><td><span class="tag-danger">HTTP مكشوف</span></td></tr>
+          <tr><td>مصدر البرنامج</td><td><span class="tag-safe">العراق — مضمون</span></td><td><span class="tag-danger">سيرفرات صينية</span></td></tr>
+          <tr><td>حظر الحساب</td><td><span class="tag-safe">✗ لا خطر</span></td><td><span class="tag-danger">حظر دائم</span></td></tr>
+          <tr><td>نسخ احتياطية</td><td><span class="tag-safe">نظام خزنة</span></td><td><span class="tag-warn">بدون</span></td></tr>
+          <tr><td>انتحال Valve</td><td><span class="tag-safe">✗ لا</span></td><td><span class="tag-danger">Vale Corporation</span></td></tr>
+          <tr><td>التزام بشروط ستيم</td><td><span class="tag-safe">✗ متوافق</span></td><td><span class="tag-danger">مخالف كلياً</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <!-- ========== SOURCE ========== -->
+    <div class="source-box">
+      <div class="label">التحليل الكامل مع جميع الملفات والتوقيعات والتجزئة</div>
+      <a href="https://github.com/Hegxib/SteamTools-Deep-Analyze" target="_blank">
+        <i class="fab fa-github"></i> github.com/Hegxib/SteamTools-Deep-Analyze
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">HANZO<span class="gold">2</span>TEAM</div>
+      <p>&copy; 2026 HANZO2TEAM — جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleExpand(header) {
+      var card = header.parentElement;
+      card.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>

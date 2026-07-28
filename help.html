@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANZO2TEAM – مساعدة ودعم</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .help-page { padding-top: 100px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #ffb320; text-decoration: none; font-weight: 600;
+      margin-bottom: 30px; transition: opacity 0.3s;
+    }
+    .back-link:hover { opacity: 0.7; }
+    .problem-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,179,32,0.08);
+      border-radius: 16px; padding: 24px 26px; margin-bottom: 16px;
+      transition: all 0.3s;
+    }
+    .problem-card:hover {
+      border-color: rgba(255,179,32,0.2);
+      transform: translateX(-4px);
+    }
+    .problem-card h3 {
+      color: #ffb320; font-size: 1.1rem; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .problem-card h3 i { font-size: 1.2rem; }
+    .problem-card p {
+      color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.8;
+    }
+    .problem-card .solution {
+      margin-top: 10px; padding: 10px 16px;
+      background: rgba(255,179,32,0.05); border-radius: 10px;
+      border-right: 3px solid #ffb320;
+    }
+    .problem-card .solution strong { color: #ffb320; }
+    .video-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px; margin-top: 10px;
+    }
+    .video-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,179,32,0.08);
+      border-radius: 16px; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .video-card:hover {
+      border-color: rgba(255,179,32,0.2);
+      transform: translateY(-4px);
+    }
+    .video-wrapper {
+      position: relative; width: 100%; aspect-ratio: 16 / 9;
+      background: #07070d;
+    }
+    .video-wrapper video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .video-card-body { padding: 16px 18px 20px; }
+    .video-card-body h4 {
+      color: #fff; font-size: 1rem; margin-bottom: 4px;
+    }
+    .video-card-body p {
+      color: rgba(255,255,255,0.4); font-size: 0.88rem;
+    }
+    .contact-support-box {
+      background: rgba(255,179,32,0.04);
+      border: 1px solid rgba(255,179,32,0.12);
+      border-radius: 16px; padding: 30px; text-align: center;
+      margin-top: 40px;
+    }
+    .contact-support-box h3 { color: #fff; margin-bottom: 8px; }
+    .contact-support-box p { color: rgba(255,255,255,0.5); margin-bottom: 18px; }
+    .support-channels {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .support-channels .channel-btn { min-width: 140px; }
+
+    @media (max-width: 768px) {
+      .video-grid { grid-template-columns: 1fr; }
+      .help-page { padding-top: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== شريط التنقل ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">HANZO<span class="gold">2</span>TEAM</a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+        <li><a href="index.html#about" class="nav-link">عن البرنامج</a></li>
+        <li><a href="policy.html" class="nav-link nav-policy">سياسة الحظر</a></li>
+        <li><a href="index.html#pricing" class="nav-link">السعر</a></li>
+        <li><a href="dangers.html" class="nav-link nav-danger">تحذير المخاطر</a></li>
+        <li><a href="index.html#contact" class="nav-link">الدعم</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container help-page">
+
+    <!-- ========== رجوع ========== -->
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> الرجوع للرئيسية</a>
+
+    <!-- ========== مشاكل شائعة ========== -->
+    <section class="section" id="problems" style="padding-top:0">
+      <h2 class="section-title">مشاكل شائعة وحلولها</h2>
+      <p class="section-subtitle">أغلب المشاكل اللي ممكن تواجهك وحلها هنا</p>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-times-circle"></i> البرنامج ما يشتغل أو يطفى لحاله</h3>
+        <p>إذا البرنامج ما يفتح أو يطفي بعد ما تشغله مباشرة.</p>
+        <div class="solution"><strong>الحل:</strong> شغّل البرنامج كمسؤول (اضغط عليه كلك يمين واختر "تشغيل كمسؤول"). تأكد أن عندك <strong>VC++ Redistributable</strong> و <strong>WebView2 Runtime</strong> مثبتة على جهازك.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-gamepad"></i> الألعاب ما تظهر في مكتبة ستيم</h3>
+        <p>بعد ما تضيف اللعبة وتفعّل، ما تظهر في مكتبة ستيم.</p>
+        <div class="solution"><strong>الحل:</strong> أطفى ستيم بالكامل (اخرج من العلبة جنب الساعة)، وافتله مرة ثانية. كمان تأكد إن مسار ستيم مضبوط في الإعدادات.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-download"></i> التحميل يتوقف أو يفشل</h3>
+        <p>أثناء تحميل اللعبة أو الملفات يتوقف التحميل.</p>
+        <div class="solution"><strong>الحل:</strong> تأكد من اتصالك بالإنترنت. اغل البرنامج وافتحه مرة ثانية وحاول. إذا استمرت المشكلة، تواصل معنا.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-key"></i> مشكلة في التفعيل أو الترخيص</h3>
+        <p>مفتاح الترخيص ما يشتغل أو يطلع خطأ.</p>
+        <div class="solution"><strong>الحل:</strong> تأكد إنك كتبت المفتاح صح (نسخ ولصق). إذا استمرت المشكلة، تواصل معنا عبر الواتساب أو فيسبوك.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-window-maximize"></i> شاشة بيضاء أو سوداء عند فتح البرنامج</h3>
+        <p>البرنامج يفتح لكن بس شاشة بيضاء أو سوداء.</p>
+        <div class="solution"><strong>الحل:</strong> هذا معناه أن WebView2 Runtime مو مثبت على جهازك. حمّله من ميكروسوفت وشغّله، ثم أعد تشغيل البرنامج.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-shield-alt"></i> مكافح الفيروسات يمنع البرنامج</h3>
+        <p>مكافح الفيروسات يحذف البرنامج أو يمنعه من التشغيل.</p>
+        <div class="solution"><strong>الحل:</strong> هذا شيء طبيعي لأن البرنامج يتعامل مع ستيم. أضف البرنامج إلى قائمة الاستثناءات في مكافح الفيروسات. إذا ما عرفت، تواصل معنا.</div>
+      </div>
+
+      <div class="problem-card">
+        <h3><i class="fas fa-sync-alt"></i> البرنامج يقول فيه تحديث مطلوب</h3>
+        <p>يطلع لك نافذة تقول إنه في تحديث جديد.</p>
+        <div class="solution"><strong>الحل:</strong> دع البرنامج يحدث نفسه. إذا توقف التحميل، حمّل النسخة الجديدة من عندنا يدوياً.</div>
+      </div>
+    </section>
+
+    <!-- ========== فيديوهات تعليمية ========== -->
+    <section class="section" id="videos" style="padding-top:0">
+      <h2 class="section-title">فيديوهات تعليمية</h2>
+      <p class="section-subtitle">شوف الشرح بالفيديو عشان تطبق الخطوات</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/6Lktq5y.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>طريقة تشغيل ألعاب طرف الثالث ودينفو</h4>
+            <p>شرح تشغيل ألعاب الطرف الثالث وألعاب دينفو</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/CpwcgVS.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>سبب بقاء التحميل إلى الأبد</h4>
+            <p>ما سبب مشكلة عدم إضافة لعبة ويبقى التحميل معلق</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/jIEy9AY.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>سبب ظهور خطأ أثناء إضافة لعبة</h4>
+            <p>شرح سبب الخطأ اللي يظهر عند إضافة لعبة</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/WYXWf9n.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>كيف تشغل الألعاب أونلاين</h4>
+            <p>لألعاب اللي تشتغل على سيرفرات ستيم فقط وليس طرف ثالث</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/vBoBOQ6.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>سبب عدم اشتغال ستيم بعد التفعيل</h4>
+            <p>شرح سبب مشكلة ستيم عند الضغط على زر التفعيل</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata">
+              <source src="https://i.imgur.com/Clg3ee6.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-body">
+            <h4>كيف تحصل على آخر تحديث</h4>
+            <p>شرح كيفية تحديث البرنامج لأحدث إصدار</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-support-box">
+        <h3>ما لقيت حل لمشكلتك؟</h3>
+        <p>تواصل معنا مباشرة وأحد الفريق رح يساعدك</p>
+        <div class="support-channels">
+          <a href="https://wa.me/9647828525213" target="_blank" class="channel-btn whatsapp">
+            <i class="fab fa-whatsapp"></i> واتساب
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61591160105423" target="_blank" class="channel-btn facebook">
+            <i class="fab fa-facebook-f"></i> فيسبوك
+          </a>
+          <a href="https://t.me/Hanzo_2team" target="_blank" class="channel-btn telegram">
+            <i class="fab fa-telegram-plane"></i> تلغرام
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========== التذييل ========== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">HANZO<span class="gold">2</span>TEAM</div>
+      <p>&copy; 2026 HANZO2TEAM — جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="260" viewBox="0 0 320 260">
+  <rect width="320" height="260" rx="14" fill="#0d0d18" stroke="#1a4a1a" stroke-width="1.5"/>
+  <text x="160" y="30" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="11" font-family="Arial" letter-spacing="2">VIRUSTOTAL SCAN</text>
+  <text x="160" y="56" text-anchor="middle" fill="#fff" font-size="15" font-family="Arial" font-weight="bold">HANZO2TEAM</text>
+  <text x="160" y="78" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="11" font-family="Arial">الملف: Online Fix</text>
+  <circle cx="72" cy="130" r="32" fill="none" stroke="#1a4a1a" stroke-width="6"/>
+  <circle cx="72" cy="130" r="32" fill="none" stroke="#4caf50" stroke-width="6" stroke-dasharray="201" stroke-dashoffset="0"/>
+  <text x="72" y="137" text-anchor="middle" fill="#4caf50" font-size="22" font-family="Arial" font-weight="bold">0</text>
+  <text x="72" y="165" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Arial">/ 70</text>
+  <text x="72" y="186" text-anchor="middle" fill="#4caf50" font-size="10" font-family="Arial" font-weight="bold">نظيف بالكامل</text>
+  <rect x="130" y="95" width="170" height="18" rx="9" fill="rgba(76,175,80,0.08)"/>
+  <text x="140" y="108" fill="#4caf50" font-size="10" font-family="Arial">✓ لا يوجد كشف</text>
+  <rect x="130" y="118" width="170" height="18" rx="9" fill="rgba(76,175,80,0.08)"/>
+  <text x="140" y="131" fill="#4caf50" font-size="10" font-family="Arial">✓ لا Dropper</text>
+  <rect x="130" y="141" width="170" height="18" rx="9" fill="rgba(76,175,80,0.08)"/>
+  <text x="140" y="154" fill="#4caf50" font-size="10" font-family="Arial">✓ لا Malicious</text>
+  <rect x="130" y="164" width="170" height="18" rx="9" fill="rgba(76,175,80,0.08)"/>
+  <text x="140" y="177" fill="#4caf50" font-size="10" font-family="Arial">✓ لا HackTool</text>
+  <rect x="130" y="187" width="170" height="18" rx="9" fill="rgba(76,175,80,0.08)"/>
+  <text x="140" y="200" fill="#4caf50" font-size="10" font-family="Arial">✓ لا PUA</text>
+  <line x1="20" y1="220" x2="300" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <text x="160" y="242" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Arial">جميع محركات الـ 70 تصنّف الملف نظيفاً</text>
+</svg>
