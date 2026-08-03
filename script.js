@@ -116,51 +116,6 @@ fadeElements.forEach(el => {
   fadeObserver.observe(el);
 });
 
-/* ====== مشغل الصوت الخلفي ====== */
-const bgMusic = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-let isMusicPlaying = false;
-
-function toggleMusic() {
-  if (isMusicPlaying) {
-    bgMusic.pause();
-    musicToggle.classList.add('muted');
-    musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-    isMusicPlaying = false;
-  } else {
-    bgMusic.play().catch(() => {});
-    musicToggle.classList.remove('muted');
-    musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-    isMusicPlaying = true;
-  }
-}
-
-musicToggle.addEventListener('click', toggleMusic);
-
-// محاولة تشغيل الموسيقى تلقائياً عند دخول المستخدم
-document.addEventListener('click', function autoPlay() {
-  if (!isMusicPlaying) {
-    bgMusic.play().then(() => {
-      isMusicPlaying = true;
-      musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-    }).catch(() => {});
-  }
-  document.removeEventListener('click', autoPlay);
-}, { once: true });
-
-// كتم الموسيقى تلقائياً إذا كان المتصفح يمنع التشغيل التلقائي
-bgMusic.addEventListener('play', () => {
-  isMusicPlaying = true;
-  musicToggle.classList.remove('muted');
-  musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-});
-
-bgMusic.addEventListener('pause', () => {
-  isMusicPlaying = false;
-  musicToggle.classList.add('muted');
-  musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-});
-
 /* ====== نافذة العرض الترويجي ====== */
 const promoModal = document.getElementById('promoModal');
 const promoClose = document.getElementById('promoClose');
@@ -327,82 +282,6 @@ function animateParticles() {
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
-
-/* ====== مؤثرات صوتية (Audio Visualizer) ====== */
-let audioCtx, analyser, source, frequencyData;
-let visualizerActive = false;
-
-function initAudioVisualizer() {
-  if (visualizerActive) return;
-  try {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128;
-    source = audioCtx.createMediaElementSource(bgMusic);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-    frequencyData = new Uint8Array(analyser.frequencyBinCount);
-    visualizerActive = true;
-    animateVisualizer();
-  } catch (e) {}
-}
-
-const visualizerCanvas = document.createElement('canvas');
-visualizerCanvas.id = 'visualizerCanvas';
-document.querySelector('.hero').appendChild(visualizerCanvas);
-
-let vizCtx = visualizerCanvas.getContext('2d');
-let vizBars = [];
-
-function resizeViz() {
-  const hero = document.querySelector('.hero');
-  visualizerCanvas.width = hero.offsetWidth;
-  visualizerCanvas.height = 80;
-}
-resizeViz();
-window.addEventListener('resize', resizeViz);
-
-function animateVisualizer() {
-  if (!visualizerActive) return;
-  analyser.getByteFrequencyData(frequencyData);
-  vizCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
-
-  const bars = 48;
-  const step = Math.floor(frequencyData.length / bars);
-  const barW = (visualizerCanvas.width / bars) * 0.7;
-  const gap = (visualizerCanvas.width / bars) * 0.3;
-
-  for (let i = 0; i < bars; i++) {
-    let sum = 0;
-    for (let j = 0; j < step; j++) {
-      sum += frequencyData[i * step + j];
-    }
-    const avg = sum / step;
-    const h = (avg / 255) * visualizerCanvas.height * 0.9;
-
-    const x = i * (barW + gap) + gap / 2;
-    const y = visualizerCanvas.height - h;
-
-    const grad = vizCtx.createLinearGradient(x, y, x, visualizerCanvas.height);
-    grad.addColorStop(0, '#ffb320');
-    grad.addColorStop(0.5, '#ff8c00');
-    grad.addColorStop(1, 'rgba(255, 179, 32, 0.1)');
-
-    vizCtx.fillStyle = grad;
-    vizCtx.beginPath();
-    vizCtx.roundRect(x, y, barW, h, [2, 2, 0, 0]);
-    vizCtx.fill();
-  }
-
-  requestAnimationFrame(animateVisualizer);
-}
-
-// ربط المشغل الصوتي مع الفيجوالايزر
-const origPlay = bgMusic.play.bind(bgMusic);
-bgMusic.play = function() {
-  initAudioVisualizer();
-  return origPlay();
-};
 
 /* ====== تأثير لمعة على النصوص ====== */
 const heroTitle = document.querySelector('.hero-title');
