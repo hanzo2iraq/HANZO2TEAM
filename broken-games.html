@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANZO2TEAM – الألعاب غير المتوفرة</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { cursor: default; }
+    .page-wrap { padding-top: 90px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #ffb320; text-decoration: none; font-weight: 600;
+      margin-bottom: 24px; transition: opacity 0.3s; font-size: 0.9rem;
+    }
+    .back-link:hover { opacity: 0.7; cursor: pointer; }
+
+    .bg-hero {
+      background: linear-gradient(135deg, #0d0d18, #0a0a12);
+      border: 1px solid rgba(255,179,32,0.08);
+      border-radius: 24px; padding: 44px 40px; margin-bottom: 28px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .bg-hero::before {
+      content: ''; position: absolute; width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(255,179,32,0.05) 0%, transparent 70%);
+      top: -160px; left: -160px;
+    }
+    .bg-hero .badge {
+      display: inline-block; background: rgba(255,179,32,0.1); color: #ffb320;
+      padding: 4px 18px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 1px; margin-bottom: 14px; border: 1px solid rgba(255,179,32,0.15);
+    }
+    .bg-hero h1 { font-size: 1.9rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .bg-hero h1 .hl { color: #ffb320; }
+    .bg-hero p { color: rgba(255,255,255,0.5); font-size: 0.98rem; max-width: 720px; margin: 0 auto; line-height: 1.9; }
+
+    .bg-note {
+      background: linear-gradient(135deg, rgba(255,179,32,0.04), rgba(255,179,32,0.01));
+      border: 1px solid rgba(255,179,32,0.1); border-radius: 18px;
+      padding: 22px 28px; margin-bottom: 32px; border-right: 4px solid #ffb320;
+    }
+    .bg-note p { color: rgba(255,255,255,0.6); line-height: 1.9; font-size: 0.94rem; margin: 0; }
+    .bg-note strong { color: #fff; }
+
+    .controls {
+      display: flex; gap: 14px; align-items: center;
+      flex-wrap: wrap; margin-bottom: 22px;
+    }
+    .search-box {
+      flex: 1; min-width: 240px; position: relative;
+    }
+    .search-box input {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+      color: #fff; padding: 12px 42px 12px 14px; font-size: 0.9rem;
+      font-family: inherit; outline: none; transition: border-color 0.3s;
+    }
+    .search-box input:focus { border-color: rgba(255,179,32,0.4); }
+    .search-box input::placeholder { color: rgba(255,255,255,0.3); }
+    .search-box i {
+      position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+      color: rgba(255,255,255,0.25); font-size: 0.85rem;
+    }
+
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.55); border-radius: 50px;
+      padding: 8px 16px; font-size: 0.82rem; font-weight: 600; font-family: inherit;
+      transition: all 0.3s; display: inline-flex; align-items: center; gap: 7px;
+    }
+    .tab:hover { color: #fff; border-color: rgba(255,179,32,0.3); cursor: pointer; }
+    .tab .t-count {
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4);
+      font-size: 0.7rem; padding: 1px 9px; border-radius: 50px;
+    }
+    .tab.active {
+      background: rgba(255,179,32,0.12); border-color: rgba(255,179,32,0.35);
+      color: #ffb320; cursor: default;
+    }
+    .tab.active .t-count { background: rgba(255,179,32,0.15); color: #ffb320; }
+
+    .cat-header {
+      display: flex; align-items: center; gap: 12px; margin: 30px 0 16px;
+      padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .cat-header .c-ico {
+      width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+    }
+    .cat-header h2 { font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0; }
+    .cat-header .c-count { color: rgba(255,255,255,0.3); font-size: 0.78rem; }
+    .cat-header .c-issue { color: rgba(255,255,255,0.45); font-size: 0.82rem; margin-top: 3px; }
+
+    .games-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px; margin-bottom: 30px;
+    }
+    .game-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
+      padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .game-card:hover { border-color: rgba(255,179,32,0.25); background: rgba(255,255,255,0.03); }
+    .game-card .g-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .game-card .g-name { color: #fff; font-weight: 600; font-size: 0.9rem; line-height: 1.5; }
+    .game-card .g-appid {
+      color: rgba(255,179,32,0.85); font-size: 0.7rem; font-family: monospace;
+      text-decoration: none; white-space: nowrap;
+      background: rgba(255,179,32,0.07); border: 1px solid rgba(255,179,32,0.15);
+      padding: 2px 9px; border-radius: 50px;
+    }
+    .game-card .g-appid:hover { color: #ffb320; cursor: pointer; }
+    .game-card .g-issue { color: rgba(255,255,255,0.4); font-size: 0.78rem; line-height: 1.7; }
+
+    .empty-state {
+      text-align: center; padding: 60px 20px; color: rgba(255,255,255,0.35);
+      border: 1px dashed rgba(255,255,255,0.08); border-radius: 16px;
+    }
+    .empty-state i { font-size: 2rem; margin-bottom: 12px; color: rgba(255,179,32,0.4); }
+
+    @media (max-width: 600px) {
+      .bg-hero { padding: 30px 20px; }
+      .bg-hero h1 { font-size: 1.4rem; }
+      .games-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">HANZO<span class="gold">2</span>TEAM</a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+        <li><a href="help.html" class="nav-link nav-help">مساعدة وحلول</a></li>
+        <li><a href="policy.html" class="nav-link nav-policy">سياسة الحظر</a></li>
+        <li><a href="dangers.html" class="nav-link nav-danger">تحذير المخاطر</a></li>
+        <li><a href="broken-games.html" class="nav-link nav-unavail active">ألعاب غير متوفرة</a></li>
+        <li><a href="index.html#pricing" class="nav-link">السعر</a></li>
+        <li><a href="index.html#contact" class="nav-link">الدعم</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container page-wrap">
+
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> الرجوع للرئيسية</a>
+
+    <div class="bg-hero">
+      <div class="badge"><i class="fas fa-circle-info"></i> قائمة محدّثة باستمرار</div>
+      <h1>الألعاب <span class="hl">غير المتوفرة</span></h1>
+      <p>هذه قائمة بالألعاب التي <strong style="color:#fff;">لا تعمل بشكل طبيعي</strong> مع أدوات الفتح الحالية، أو التي تعتمد على مشغلات (Launchers) تمنع تشغيلها، أو ما تزال محمية بتقنيات حماية يصعب كسرها. ننشر هذه القائمة حتى لا تشتري اللعبة ثم تكتشف أنها لا تعمل.</p>
+    </div>
+
+    <div class="bg-note">
+      <p><i class="fas fa-lightbulb" style="color:#ffb320;"></i> <strong>ملاحظة مهمة:</strong> هذه القائمة ليست وعداً بأن اللعبة ستُفتح قريباً — بعض الألعاب قد تحتاج انتظاراً طويلاً أو قد لا تعمل أبداً. دائماً تأكد من القائمة قبل الشراء أو قبل السؤال عن لعبة، وابحث في القائمة عن اسم اللعبة للتأكد من حالتها.</p>
+    </div>
+
+    <div class="controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="ابحث عن اسم اللعبة... (مثال: Resident Evil)">
+      </div>
+      <div class="tabs" id="tabs"></div>
+    </div>
+
+    <div id="content"></div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">HANZO<span class="gold">2</span>TEAM</div>
+      <p>&copy; 2026 HANZO2TEAM — جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script src="broken-games.js"></script>
+  <script>
+    var CATEGORY_META = {
+      denuvo:      { icon: 'fa-shield-halved', color: '#ff5555', bg: 'rgba(255,85,85,0.1)', border: 'rgba(255,85,85,0.2)' },
+      denuvo_old:  { icon: 'fa-clock-rotate-left', color: '#ff9f43', bg: 'rgba(255,159,67,0.1)', border: 'rgba(255,159,67,0.2)' },
+      ubisoft:     { icon: 'fa-cubes', color: '#4a9eff', bg: 'rgba(74,158,255,0.1)', border: 'rgba(74,158,255,0.2)' },
+      ea:          { icon: 'fa-gamepad', color: '#4caf50', bg: 'rgba(76,175,80,0.1)', border: 'rgba(76,175,80,0.2)' },
+      rockstar:    { icon: 'fa-star', color: '#ffb320', bg: 'rgba(255,179,32,0.1)', border: 'rgba(255,179,32,0.2)' }
+    };
+    var CATEGORY_ORDER = ['denuvo', 'denuvo_old', 'ubisoft', 'ea', 'rockstar'];
+    var activeTab = 'all';
+    var searchTerm = '';
+
+    function totalCount() {
+      var t = 0;
+      for (var k in BROKEN_GAMES) { if (BROKEN_GAMES.hasOwnProperty(k)) t += BROKEN_GAMES[k].games.length; }
+      return t;
+    }
+
+    function buildTabs() {
+      var html = '<button class="tab active" data-cat="all" onclick="setTab(this, \'all\')">الكل <span class="t-count">' + totalCount() + '</span></button>';
+      CATEGORY_ORDER.forEach(function (key) {
+        var cat = BROKEN_GAMES[key];
+        html += '<button class="tab" data-cat="' + key + '" onclick="setTab(this, \'' + key + '\')">' + cat.label + ' <span class="t-count">' + cat.games.length + '</span></button>';
+      });
+      document.getElementById('tabs').innerHTML = html;
+    }
+
+    function setTab(el, key) {
+      activeTab = key;
+      var tabs = document.querySelectorAll('.tab');
+      for (var i = 0; i < tabs.length; i++) {
+        if (tabs[i].dataset.cat === key) tabs[i].classList.add('active');
+        else tabs[i].classList.remove('active');
+      }
+      render();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function render() {
+      var content = document.getElementById('content');
+      var term = searchTerm.trim().toLowerCase();
+      var html = '';
+      var anyShown = false;
+
+      CATEGORY_ORDER.forEach(function (key) {
+        if (activeTab !== 'all' && activeTab !== key) return;
+        var cat = BROKEN_GAMES[key];
+        var meta = CATEGORY_META[key];
+        var list = cat.games;
+
+        if (term) {
+          list = list.filter(function (g) {
+            return g[1].toLowerCase().indexOf(term) !== -1 || g[0].indexOf(term) !== -1;
+          });
+        }
+
+        if (list.length > 0) anyShown = true;
+
+        html += '<div class="cat-header">'
+          + '<div class="c-ico" style="background:' + meta.bg + ';border:1px solid ' + meta.border + ';color:' + meta.color + ';"><i class="fas ' + meta.icon + '"></i></div>'
+          + '<div><h2>' + cat.label + ' <span class="c-count">(' + list.length + ' لعبة)</span></h2>'
+          + '<div class="c-issue">' + escapeHtml(cat.issue) + '</div></div></div>';
+
+        html += '<div class="games-grid">';
+        list.forEach(function (g) {
+          html += '<div class="game-card">'
+            + '<div class="g-top">'
+            + '<span class="g-name">' + escapeHtml(g[1]) + '</span>'
+            + '<a class="g-appid" href="https://store.steampowered.com/app/' + g[0] + '" target="_blank" title="فتح صفحة اللعبة في متجر ستيم">' + g[0] + '</a>'
+            + '</div>'
+            + '<span class="g-issue">' + escapeHtml(cat.issue) + '</span>'
+            + '</div>';
+        });
+        html += '</div>';
+      });
+
+      if (!anyShown) {
+        html = '<div class="empty-state"><i class="fas fa-search"></i><br>لا توجد نتائج مطابقة للبحث «' + escapeHtml(searchTerm) + '»</div>';
+      }
+
+      content.innerHTML = html;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function (e) {
+      searchTerm = e.target.value;
+      render();
+    });
+
+    buildTabs();
+    render();
+  </script>
+
+</body>
+</html>

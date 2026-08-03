@@ -197,6 +197,24 @@ body {
   color: #ff7777 !important;
 }
 
+.nav-unavail {
+  background: rgba(255, 255, 255, 0.06);
+  color: #c9c9d4 !important;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nav-unavail:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.nav-unavail.active {
+  background: rgba(255, 179, 32, 0.12) !important;
+  color: #ffb320 !important;
+  border-color: rgba(255, 179, 32, 0.3) !important;
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -1221,6 +1239,17 @@ body {
   .nav-policy:hover {
     background: rgba(30, 144, 255, 0.2) !important;
     color: #6db8ff !important;
+  }
+
+  .nav-unavail {
+    background: rgba(255, 255, 255, 0.05);
+    color: #c9c9d4 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-unavail:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
   }
 
   .hero-title {
